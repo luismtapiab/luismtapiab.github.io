@@ -1,0 +1,11 @@
+{% assign repo_url = include.repository | split: '/' %}
+
+<div class="repo p-2 text-center">
+  <a href="https://github.com/{{ include.repository }}">
+   
+    <img width="360"
+      alt="{{ include.repository }}"
+      src="https://github-readme-stats.vercel.app/api/pin/?username={{ repo_url[0] }}&repo={{ repo_url[1] }}&theme=transparent"
+    >
+  </a>
+</div>

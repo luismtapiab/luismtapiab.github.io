@@ -1,0 +1,17 @@
+---
+---
+@import "minima";
+
+.profle-picture{
+    float: inline-end;
+    border-radius: 50%;
+    
+}
+
+.repositories {
+    display : flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+}
+

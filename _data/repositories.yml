@@ -1,0 +1,8 @@
+github_repos:
+- jesusjimeneztapia/chatbot-agetic
+- luismtapiab/gob-bo-scrapper
+- luismtapiab/hold_n_release_multicommand
+compilers_repos:
+- luismtapiab/TL-cbs
+- plancomps/CBS-beta
+- luismtapiab/java2ssm

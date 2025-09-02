@@ -36,7 +36,7 @@ The tools enable to the designer to generate a working interpreter based on a co
 <!-- TODO add a image of the workflow -->
 ![CBS tools generation]({{ page.asset_path }}workflow.jpg "CBS tools generation workflow")
 
-I was able to write my tiny language starting from just expressions, then adding more things one by one: declaration and asignment of variables, flow control and function calling as the least feature. You could checkout below: [my toy language TL](https://github.com/lmtapia/TL-cbs) with a complete checklist of features. It resembles a little bit of Kotlin by coincidence.
+I was able to write my tiny language starting from just expressions, then adding more things one by one: declaration and asignment of variables, flow control and function calling as the least feature. You could checkout below: [my toy language TL](https://github.com/luismtapiab/TL-cbs) with a complete checklist of features. It resembles a little bit of Kotlin by coincidence.
 <!-- TODO be more especific? -->
 
 I got too much excited that I wrote my own `funcons`. It was helpful to understand how to extend the current `funcons` library. This also means I got to the part of generating an funcons intepreter extending the provided one wich wasn't on the objectives of the study but it was something I owed to myself. They may not describe other languages behaviour as was discussed with Prof. Mosses from PLanCompS.

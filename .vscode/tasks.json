@@ -6,15 +6,13 @@
         {
             "label": "build",
             "type": "shell",
-            "command": "bundle jekyll build"
+            "command": "\"bundle exec jekyll build\""
         },
         {
             "label": "serve",
             "type": "shell",
-            "command": "bundle jekyll serve",
-            "args": [
-                "--incremental"
-            ],
+            "command": "\"bundle exec jekyll serve --livereload\"",
+           
             "runOptions": {
                 "runOn": "folderOpen"
             }

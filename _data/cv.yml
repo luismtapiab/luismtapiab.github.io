@@ -14,30 +14,35 @@ education:
       - "Compilers construction"
       - "Semantics"
       - "Database taller"
-    thesis: "Thesis in the field of compilers (an example of executable semantics) approved with honors."
+    thesis: "An example of executable semantics (approved with honors)."
   - institution: "UE Santa Ana"
     degree: "Bachiller en Humanidades (High School Diploma)"
     location: "Tupiza, Bolivia"
     graduation_date: "Dec, 2016"
-    achievements:
-      - "OBI Participant Potosí 2014-2016"
+    
 
 experience:
-  - role: "Freelance Developer"
-    field: "Game Development"
+  - title: "Fullstack Developer"
+    location: Tupiza, Bolivia
+    duration: "April 2025 – present"
+    responsibilities:
+      - "Fullstack development of an inventory management web application for a local business."
+      - "Migration of data from a legacy system to a new database." 
+      - "Design of user interaction."
+  - title: "Fullstack Developer Game Development"
     location: "Remote"
     duration: "Aug 2023 – Feb 2024"
     responsibilities:
       - "Configuration of cloud solutions: GoogleCloud, Azure storage."
       - "Implementation of REST APIs."
       - "Design of user interaction, scene changes."
-  - role: "Freelance Developer"
+  - title: "C# developer"
     location: "Remote"
     duration: "Jan 2021 – Feb 2022"
     responsibilities:
       - "Image processing, applying OpenCV in Unity."
       - "C# modules implementation, retrieve data from location provider."
-  - role: "Teaching Assistant"
+  - title: "Teaching Assistant"
     institution: "Universidad Mayor de San Simón"
     location: "Cochabamba, Bolivia"
     duration: "Feb 2020 – Jan 2021"
@@ -45,7 +50,7 @@ experience:
       - "Teaching of the subject Introduction to Programming, with focus on problem resolution."
       - "Teaching of programming languages Java and Pseint."
       - "Application of OOP concepts."
-  - role: "Teaching Assistant"
+  - title: "Teaching Assistant"
     institution: "Universidad Mayor de San Simón"
     location: "Cochabamba, Bolivia"
     duration: "Feb 2019 – Jan 2021"
@@ -59,8 +64,9 @@ experience:
 achievements:
   - "3rd Place Microsoft Ambassadors Hackathon IA 2023"
   - "Robotics Silver Medal Potosí 2016"
+  - "OBI Participant Potosí 2014-2016"
 
-skills_and_interests:
+skills:
   technical:
     - "Java"
     - "JavaScript"

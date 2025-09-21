@@ -2,6 +2,8 @@
 ---
 @import "minima";
 
+
+
 .profile-picture-only{
     float: inline-end;
     border-radius: 50%;
@@ -9,6 +11,7 @@
 }
 .contact-info {
     float: inline-end;
+    transform: translateY(-90px);
     width: 200px;
     .profile-picture{
         border-radius: 50%;
@@ -20,8 +23,31 @@
     flex-wrap: wrap;
     gap: 15px;
     align-items: center;
+    img{
+        background-color: #ded5d5;
+    }
 }
 
 h2 {
   font-size: 28px;
+}
+
+.header, .space-between{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h3 {
+    width: fit-content;
+    margin-bottom: unset;
+}
+
+
+p {
+    margin-bottom: unset;
+}
+
+body{
+    background-color: antiquewhite;
 }

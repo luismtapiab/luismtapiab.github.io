@@ -19,6 +19,9 @@ education:
     degree: "Bachiller en Humanidades (High School Diploma)"
     location: "Tupiza, Bolivia"
     graduation_date: "Dec, 2016"
+    relevant_courses: 
+      - "Programming in C++"
+      - "Robotics"
     
 
 experience:
@@ -67,19 +70,25 @@ achievements:
   - "OBI Participant Potosí 2014-2016"
 
 skills:
-  technical:
+  lang:
     - "Java"
     - "JavaScript"
-    - "ReactJS"
-    - "Next.js"
     - "Haskell"
     - "Python"
     - "OpenCV"
     - "C#"
-    - "Spring Boot"
+    - "Kotlin"
+  tools:
+    
     - "PostgreSQL"
     - "JOOQ"
+    - Supabase
+    - "Spring Boot"
+    - "Angular"
+    - "ReactJS"
+    - "Next.js"
     - "Unity"
+other:  
   languages:
     - "Spanish (native)"
     - "English (Intermediate B2)"

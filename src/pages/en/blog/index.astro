@@ -1,0 +1,124 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import FormattedDate from '../../../components/FormattedDate.astro';
+import { ui } from '../../../data/i18n';
+import { SITE_TITLE } from '../../../consts';
+
+const lang = 'en';
+const t = ui[lang].blog;
+
+const posts = (await getCollection('blog', ({ data }) => data.lang === 'en')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<BaseLayout lang={lang} title={`${t.title} · ${SITE_TITLE}`} description="Luis Tapia's blog posts." wideContent>
+  <h1>{t.title}</h1>
+
+  {posts.length === 0 && (
+    <p class="empty">No posts yet — check back soon.</p>
+  )}
+
+  <ul class="post-list">
+    {posts.map(post => (
+      <li>
+        <a href={`/en/blog/${post.id.replace('en/', '').replace(/\.mdx?$/, '')}/`} class="post-card card">
+          <div class="post-info">
+            <time class="post-date"><FormattedDate date={post.data.pubDate} /></time>
+            <h2 class="post-title">{post.data.title}</h2>
+            <p class="post-desc">{post.data.description}</p>
+            <span class="read-more">{t.readMore} →</span>
+          </div>
+          {post.data.heroImage && (
+            <img
+              class="post-thumb"
+              width={480}
+              height={240}
+              src={post.data.heroImage}
+              alt=""
+            />
+          )}
+        </a>
+      </li>
+    ))}
+  </ul>
+</BaseLayout>
+
+<style>
+  h1 { margin-bottom: 1.5em; }
+
+  .empty { color: var(--text-muted); font-style: italic; }
+
+  .post-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .post-card {
+    display: flex;
+    gap: 2rem;
+    text-decoration: none;
+    color: inherit;
+    padding: 1.25rem;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .post-thumb {
+    width: 240px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+
+  .post-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3em;
+  }
+
+  .post-date {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .post-title {
+    font-size: 1.2rem;
+    margin: 0;
+    color: var(--text);
+    transition: color var(--transition);
+  }
+
+  .post-card:hover .post-title { color: var(--accent); }
+
+  .post-desc {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .read-more {
+    font-size: 0.85rem;
+    color: var(--accent);
+    font-weight: 600;
+    margin-top: 0.25em;
+  }
+
+  @media (max-width: 560px) {
+    .post-card { flex-direction: column; }
+    .post-thumb { width: 100%; height: 160px; }
+  }
+  @media (max-width: 560px) {
+    .post-card { flex-direction: column-reverse; }
+    .post-thumb { width: 100%; height: 160px; }
+  }
+</style>

@@ -1,0 +1,94 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { ui } from '../../data/i18n';
+
+const lang = 'en';
+const t = ui[lang];
+---
+
+<BaseLayout lang={lang} title="Personal Roadmap" description="Luis Tapia's personal roadmap and learning journey.">
+  <div class="prose">
+    <h2> REWRITE THIS </h2>
+
+    <h1>Personal Roadmap</h1>
+    <p>This is a private roadmap to track my core interests and learning journey.</p>
+
+    <section class="roadmap-section">
+      <h2>1. Compiler Construction</h2>
+      <ul>
+        <li>Explore advanced parsing techniques.</li>
+        <li>Deepen understanding of semantic analysis and code generation.</li>
+        <li>Continue contributing to or exploring frameworks like CBS (PLanCompS).</li>
+      </ul>
+    </section>
+
+    <section class="roadmap-section">
+      <h2>2. Higher Education & Pedagogy</h2>
+      <p>Building on my <strong>Diplomado in Higher Education</strong>, I'm focusing on:</p>
+      <ul>
+        <li>Integrating software engineering principles into educational curricula.</li>
+        <li>Exploring active learning methodologies for technical subjects.</li>
+        <li>Developing effective mentoring strategies for junior developers and students.</li>
+      </ul>
+    </section>
+
+    <section class="roadmap-section">
+      <h2>3. Medical & Informatics Integration</h2>
+      <ul>
+        <li>Investigate the intersection of software engineering and healthcare.</li>
+        <li>Explore data interoperability standards (like FHIR).</li>
+        <li>Understand the challenges of building reliable and compliant medical software.</li>
+      </ul>
+    </section>
+
+    <section class="roadmap-section">
+      <h2>4. Context Assembly for AI Agents</h2>
+      <ul>
+        <li>Study how large language models utilize context and memory.</li>
+        <li>Experiment with building custom agents and optimizing their prompt context window.</li>
+        <li>Explore vector databases and retrieval-augmented generation (RAG) techniques.</li>
+        <li>Investigate agentic workflows and autonomous agent architectures.</li>
+      </ul>
+    </section>
+
+    <hr />
+
+    <section class="roadmap-section">
+      <h2>Upcoming Content (Possible Posts)</h2>
+      <ul>
+        <li><em>"Reflections on Higher Education: Applying the Diplomado to CS"</em></li>
+        <li><em>"The Logic of Teaching: How Compilers Taught Me to Teach"</em></li>
+        <li><em>"Medical Software: Beyond CRUD Applications"</em></li>
+        <li><em>"Building a Better Context: RAG Strategies for AI Agents"</em></li>
+      </ul>
+    </section>
+
+    <p class="status"><em>Status: Work in progress. Updated periodically.</em></p>
+  </div>
+</BaseLayout>
+
+<style>
+  .prose {
+    max-width: 65ch;
+    margin: 0 auto;
+    padding: 2rem 0;
+  }
+  .roadmap-section {
+    margin-bottom: 2.5rem;
+  }
+  .roadmap-section h2 {
+    margin-bottom: 1rem;
+    color: var(--accent);
+  }
+  ul {
+    padding-left: 1.5rem;
+  }
+  li {
+    margin-bottom: 0.5rem;
+  }
+  .status {
+    margin-top: 3rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+</style>

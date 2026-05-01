@@ -1,0 +1,136 @@
+---
+import { ui, type Lang } from '../data/i18n';
+import HeaderLink from './HeaderLink.astro';
+import ThemeToggle from './ThemeToggle.astro';
+import Search from './Search.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = ui[lang].nav;
+const base = `/${lang}`;
+const otherLang = lang === 'en' ? 'es' : 'en';
+
+// Build the equivalent page URL in the other language
+const { pathname } = Astro.url;
+const otherPath = pathname.replace(`/${lang}/`, `/${otherLang}/`).replace(`/${lang}`, `/${otherLang}/`);
+---
+
+<header>
+  <nav>
+    <a class="site-title" href={base}>Luis Tapia</a>
+    <div class="internal-links">
+      <HeaderLink href={base}>{t.home}</HeaderLink>
+      <HeaderLink href={`${base}/blog`}>{t.blog}</HeaderLink>
+      <HeaderLink href={`${base}/about`}>{t.about}</HeaderLink>
+    </div>
+    <div class="controls">
+      <button class="search-toggle" onclick="window.openSearch()" title={t.search} aria-label={t.search}>
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
+      <a href={otherPath} class="lang-toggle" title="Switch language">
+        {t.switchLang}
+      </a>
+      <ThemeToggle />
+    </div>
+  </nav>
+  <Search />
+</header>
+
+<style>
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: color-mix(in srgb, var(--bg) 90%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 1.5em;
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    height: 58px;
+    max-width: var(--max-w-wide);
+    margin: 0 auto;
+  }
+
+  .site-title {
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+    flex-shrink: 0;
+    transition: color var(--transition);
+  }
+  .site-title:hover { color: var(--accent); }
+
+  .internal-links {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    flex: 1;
+  }
+
+  .controls {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+  }
+
+  .search-toggle {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 0.4em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: background var(--transition), color var(--transition);
+  }
+
+  .search-toggle:hover {
+    color: var(--text);
+    background: color-mix(in srgb, var(--border) 60%, transparent);
+  }
+
+  .lang-toggle {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 0.25em 0.6em;
+    border-radius: 6px;
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+    color: var(--accent);
+    text-decoration: none;
+    transition: background var(--transition), color var(--transition);
+  }
+  .lang-toggle:hover {
+    background: color-mix(in srgb, var(--accent) 22%, transparent);
+  }
+
+  @media (max-width: 720px) {
+    header { padding: 0 1rem; }
+    nav { gap: 0.5rem; }
+    .site-title { font-size: 0.95rem; }
+    .internal-links {
+      gap: 0.1rem;
+    }
+    .controls { gap: 0.4rem; }
+  }
+
+  @media (max-width: 480px) {
+    .site-title { display: none; }
+  }
+</style>

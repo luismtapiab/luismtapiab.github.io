@@ -1,0 +1,264 @@
+/* ============================================
+   DESIGN TOKENS
+   Warm palette: antique white × dark chocolate
+   with terracotta accent, sage secondary
+   ============================================ */
+
+:root {
+  /* Color palette — light */
+  --bg:          #faebd7;        /* antique white */
+  --bg-offset:   #f0ddc4;        /* slightly darker card/code bg */
+  --surface:     #fff8f0;        /* elevated surfaces */
+  --text:        #2a1f14;        /* dark warm brown */
+  --text-muted:  #7a6555;        /* secondary text */
+  --border:      #d8c4b0;        /* subtle dividers */
+
+  /* Accent colors */
+  --accent:      #c0533a;        /* terracotta — primary actions, links */
+  --accent-alt:  #7a9e7e;        /* sage green — tags, badges */
+  --accent-warm: #c09c53;        /* warm gold — highlights */
+
+  /* Shadows */
+  --shadow-sm:   0 1px 3px rgba(42,31,20,0.08);
+  --shadow-md:   0 4px 12px rgba(42,31,20,0.10), 0 1px 3px rgba(42,31,20,0.06);
+  --shadow-lg:   0 8px 24px rgba(42,31,20,0.12), 0 2px 6px rgba(42,31,20,0.08);
+
+  /* Layout */
+  --max-w:       350px;
+  --max-w-wide:  960px;
+
+  /* Transitions */
+  --transition:  200ms ease;
+}
+
+[data-theme='dark'] {
+  --bg:          #1e140e;        /* near-black chocolate */
+  --bg-offset:   #2b1e16;        /* dark chocolate */
+  --surface:     #38261c;        /* lifted surfaces */
+  --text:        #fdf5e6;        /* old lace */
+  --text-muted:  #b89f8a;        /* muted warm */
+  --border:      #4a3525;        /* dark borders */
+
+  --accent:      #e07a60;        /* lighter terracotta for dark bg */
+  --accent-alt:  #8bbf8e;        /* lighter sage */
+  --accent-warm: #d4aa5f;        /* lighter gold */
+
+  --shadow-sm:   0 1px 3px rgba(0,0,0,0.3);
+  --shadow-md:   0 4px 12px rgba(0,0,0,0.35), 0 1px 3px rgba(0,0,0,0.2);
+  --shadow-lg:   0 8px 24px rgba(0,0,0,0.4), 0 2px 6px rgba(0,0,0,0.25);
+}
+
+/* ============================================
+   RESET & BASE
+   ============================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Atkinson Hyperlegible', 'Georgia', serif;
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-size: clamp(16px, 1.8vw, 18px);
+  line-height: 1.7;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  transition: background var(--transition), color var(--transition);
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 0.5em;
+  color: var(--text);
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+h1 { font-size: clamp(1.75rem, 4.5vw, 2.5rem); }
+h2 { font-size: clamp(1.3rem, 3vw, 1.9rem); }
+h3 { font-size: clamp(1.1rem, 2.2vw, 1.5rem); }
+h4 { font-size: 1.2rem; }
+h5 { font-size: 1.05rem; }
+
+p { margin-bottom: 1em; }
+.prose p { margin-bottom: 1.6em; }
+
+strong, b { font-weight: 700; }
+
+/* ============================================
+   LINKS
+   ============================================ */
+
+a {
+  color: var(--accent);
+  text-decoration-color: transparent;
+  text-underline-offset: 3px;
+  transition: color var(--transition), text-decoration-color var(--transition);
+}
+a:hover {
+  text-decoration-color: var(--accent);
+}
+
+/* ============================================
+   LAYOUT
+   ============================================ */
+
+main {
+  width: var(--max-w-wide);
+  max-width: calc(100% - 2em);
+  margin: 0 auto;
+  padding: 3em 1em;
+}
+
+/* ============================================
+   MEDIA
+   ============================================ */
+
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  display: block;
+}
+
+/* ============================================
+   CODE
+   ============================================ */
+
+code {
+  font-family: 'Consolas', 'Menlo', monospace;
+  font-size: 0.87em;
+  padding: 0.15em 0.4em;
+  background: var(--bg-offset);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--accent);
+}
+
+pre {
+  background: var(--bg-offset);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.4em 1.6em;
+  overflow-x: auto;
+  box-shadow: var(--shadow-sm);
+}
+
+pre > code {
+  all: unset;
+  font-family: 'Consolas', 'Menlo', monospace;
+  font-size: 0.875em;
+  color: var(--text);
+}
+
+/* ============================================
+   BLOCKQUOTE
+   ============================================ */
+
+blockquote {
+  border-left: 3px solid var(--accent);
+  padding: 0.6em 0 0.6em 1.4em;
+  margin: 1.5em 0;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ============================================
+   HR
+   ============================================ */
+
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2em 0;
+}
+
+/* ============================================
+   TABLE
+   ============================================ */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  text-align: left;
+  padding: 0.5em 0.75em;
+  border-bottom: 1px solid var(--border);
+}
+
+th {
+  color: var(--text-muted);
+  font-size: 0.85em;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ============================================
+   CARDS (shared utility)
+   ============================================ */
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.25em 1.5em;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+/* ============================================
+   TAGS / BADGES
+   ============================================ */
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.2em 0.7em;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent-alt) 20%, transparent);
+  color: var(--accent-alt);
+  letter-spacing: 0.02em;
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+.sr-only {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 720px) {
+  main { padding: 1.5em 1em; 
+    width: var(--max-w);
+    max-width: calc(100% - 2em);
+    margin: 0 auto;
+  }
+}

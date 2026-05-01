@@ -1,0 +1,113 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Repo from '../../components/Repo.astro';
+import { ui } from '../../data/i18n';
+import { compilersRepos, otherRepos } from '../../data/repos';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+
+const lang = 'en';
+const t = ui[lang];
+---
+
+<BaseLayout lang={lang} title={SITE_TITLE} description={SITE_DESCRIPTION} wideContent>
+  <section class="hero">
+    <div class="hero-text">
+      <h1>{t.home.greeting}</h1>
+      <p class="lead" set:html={t.home.intro} />
+    </div>
+    <img
+      class="avatar"
+      src="/assets/images/LuisTapia.png"
+      alt="Luis Tapia"
+      width="240"
+      height="240"
+    />
+  </section>
+
+  <section class="projects">
+    <h2>{t.home.compilers}</h2>
+    <div class="repo-grid">
+      {compilersRepos.map(r => <Repo repository={r.id} />)}
+    </div>
+
+    <h2>{t.home.other}</h2>
+    <div class="repo-grid">
+      {otherRepos.map(r => <Repo repository={r.id} />)}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    margin-bottom: 3.5rem;
+    flex-wrap: wrap-reverse;
+  }
+
+  .hero-text {
+    flex: 1;
+    min-width: 240px;
+  }
+
+  .lead {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    margin-top: 0.5em;
+    max-width: 65ch;
+  }
+
+  .avatar {
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    box-shadow: var(--shadow-md);
+    border: 3px solid var(--border);
+  }
+
+  .projects h2 {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--text-muted);
+    margin-top: 2.5em;
+    margin-bottom: 1em;
+    padding-bottom: 0.4em;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .repo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      flex-direction: column-reverse;
+      align-items: center;
+      text-align: center;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .avatar {
+      width: 180px;
+      height: 180px;
+    }
+
+    .lead {
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 1rem;
+      max-width: 100%;
+    }
+
+    .projects h2 {
+      margin-top: 2rem;
+    }
+  }
+</style>

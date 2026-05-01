@@ -1,0 +1,43 @@
+---
+const { repository } = Astro.props;
+const [username, repoName] = repository.split('/');
+---
+<a
+  class="repo-card"
+  href={`https://github.com/${repository}`}
+  target="_blank"
+  rel="noopener noreferrer"
+  title={repository}
+>
+  <img
+    src={`/assets/images/repos/${username}-${repoName}.svg`}
+    alt={`${repoName} stats card`}
+    loading="lazy"
+    width="380"
+    height="120"
+    onerror={`this.onerror=null; this.src='https://github-readme-stats.shion.dev/api/pin/?username=${username}&repo=${repoName}&theme=transparent&langs_count=10'`}
+  />
+</a>
+
+<style>
+  .repo-card {
+    display: block;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    transition: box-shadow var(--transition), transform var(--transition), border-color var(--transition);
+    text-decoration: none;
+  }
+  .repo-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+    border-color: var(--accent);
+  }
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 0;
+  }
+</style>

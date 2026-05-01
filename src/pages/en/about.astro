@@ -1,0 +1,243 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { ui } from '../../data/i18n';
+import { cv } from '../../data/cv';
+import { SITE_TITLE } from '../../consts';
+
+const lang = 'en';
+const t = ui[lang].about;
+---
+
+<BaseLayout lang={lang} title={`${t.title} · ${SITE_TITLE}`} description="About Luis Tapia — developer and musician from Bolivia.">
+  <section class="about-header">
+    <div class="about-title-contact">
+      <h1>Luis Miguel Tapia Benitez</h1>
+      <div class="contact-info">
+        <p>{cv.contact.location}</p>
+        <p>Github: <a href={cv.contact.github} target="_blank" rel="noopener noreferrer">luismtapiab</a></p>
+        <p><a href={`tel:${cv.contact.phone}`}>{cv.contact.phone}</a></p>
+        <p><a href={`mailto:${cv.contact.email}`}>{cv.contact.email}</a></p>
+      </div>
+    </div>
+    <img
+      class="profile-pic"
+      src="/assets/images/LuisTapia.png"
+      alt="Luis Tapia"
+      width="200"
+      height="200"
+    />
+  </section>
+
+  <section class="cv-section">
+    <h2>Technical Skills</h2>
+    <div class="skills-simple">
+      <p><strong>Languages:</strong> {cv.skills.lang.join(', ')}</p>
+      <p><strong>Tools:</strong> {cv.skills.tools.join(', ')}</p>
+    </div>
+  </section>
+
+  <section class="cv-section">
+    <h2>{t.experience}</h2>
+    {cv.experience.map(exp => (
+      <div class="cv-item">
+        <div class="cv-item-header">
+          <h3>{exp.title}</h3>
+          <span class="meta">{exp.institution ? `${exp.institution}. ` : ''}{exp.location}. {exp.duration}</span>
+        </div>
+        <ul>
+          {exp.responsibilities.map(r => <li>{r}</li>)}
+        </ul>
+      </div>
+    ))}
+  </section>
+
+  <section class="cv-section">
+    <h2>{t.education}</h2>
+    {cv.education.map(edu => (
+      <div class="cv-item">
+        <div class="cv-item-header">
+          <h3>{edu.degree}</h3>
+          <span class="meta">{edu.graduation_date}</span>
+        </div>
+        <div class="space-between">
+          <p class="institution">{edu.institution}</p>
+          <p class="location">{edu.location}</p>
+        </div>
+        {edu.thesis && <p class="thesis"><strong>{t.thesis}:</strong> {edu.thesis}</p>}
+        {edu.relevant_courses.length > 0 && (
+          <p class="courses"><strong>{t.courses}:</strong> {edu.relevant_courses.join(', ')}</p>
+        )}
+      </div>
+    ))}
+  </section>
+
+  <section class="cv-section split">
+    <div class="cv-sub-section">
+      <h2>{t.languages}</h2>
+      <p>{cv.other.languages.join(', ')}</p>
+    </div>
+    <div class="cv-sub-section">
+      <h2>{t.interests}</h2>
+      <p>{cv.other.interests.join(', ')}</p>
+    </div>
+  </section>
+
+  <section class="cv-section">
+    <h2>{t.achievements}</h2>
+    <ul>
+      {cv.achievements.map(a => <li>{a}</li>)}
+    </ul>
+  </section>
+
+  <a href="/assets/LuisTapia.pdf" target="_blank" class="pdf-link-bottom">Download PDF</a>
+</BaseLayout>
+
+<style>
+  .about-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+    margin-bottom: 3em;
+  }
+
+  .about-title-contact h1 {
+    margin-bottom: 0.25em;
+    font-size: clamp(1.5rem, 8vw, 2.5rem);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .contact-info p {
+    margin: 0.1em 0;
+    font-size: 1.1rem;
+    color: var(--text);
+  }
+
+  .profile-pic {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--border);
+  }
+
+  .pdf-link-bottom {
+    display: inline-block;
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    padding: 0.6em 1.2em;
+    background: var(--accent);
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: var(--shadow-md);
+    transition: transform var(--transition);
+    z-index: 100;
+  }
+
+  .pdf-link-bottom:hover {
+    transform: scale(1.05);
+  }
+
+  .cv-section {
+    margin-bottom: 2.5em;
+  }
+
+  .cv-section h2 {
+    font-size: 1.8rem;
+    color: var(--text);
+    margin-bottom: 0.75em;
+    border-bottom: none;
+    text-transform: none;
+    letter-spacing: normal;
+  }
+
+  .skills-simple p {
+    font-size: 1.1rem;
+    margin: 0.5em 0;
+  }
+
+  .cv-item {
+    margin-bottom: 1.5em;
+  }
+
+  .cv-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1em;
+    margin-bottom: 0.25em;
+  }
+
+  .cv-item-header h3 {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+
+  .meta {
+    font-size: 1rem;
+    color: var(--text);
+  }
+
+  .space-between {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.1rem;
+    margin-bottom: 0.5em;
+  }
+
+  .institution, .location {
+    margin: 0;
+  }
+
+  ul {
+    margin: 0.4em 0;
+    padding-left: 1.5em;
+  }
+
+  li {
+    margin-bottom: 0.25em;
+    font-size: 1.1rem;
+  }
+
+  .thesis, .courses {
+    font-size: 1.05rem;
+    margin: 0.3em 0;
+  }
+
+  .split {
+    display: flex;
+    gap: 4rem;
+  }
+
+  .cv-sub-section h2 {
+    font-size: 1.5rem;
+  }
+
+  .cv-sub-section p {
+    font-size: 1.1rem;
+  }
+
+  @media (max-width: 768px) {
+    .about-header {
+      flex-direction: column-reverse;
+      align-items: center;
+      text-align: center;
+    }
+    .cv-item-header {
+      flex-direction: column;
+      gap: 0;
+    }
+    .space-between {
+      flex-direction: column;
+    }
+    .split {
+      flex-direction: column;
+      gap: 2rem;
+    }
+  }
+</style>

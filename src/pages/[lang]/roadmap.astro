@@ -1,15 +1,16 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { ui } from '../../data/i18n';
+import { type Lang } from '../../data/i18n';
 
-const lang = 'en';
-const t = ui[lang];
+export function getStaticPaths() {
+  return [{ params: { lang: 'en' } }, { params: { lang: 'es' } }];
+}
+
+const { lang } = Astro.params as { lang: Lang };
 ---
 
 <BaseLayout lang={lang} title="Personal Roadmap" description="Luis Tapia's personal roadmap and learning journey.">
   <div class="prose">
-    <h2> REWRITE THIS </h2>
-
     <h1>Personal Roadmap</h1>
     <p>This is a private roadmap to track my core interests and learning journey.</p>
 
@@ -23,7 +24,7 @@ const t = ui[lang];
     </section>
 
     <section class="roadmap-section">
-      <h2>2. Higher Education & Pedagogy</h2>
+      <h2>2. Higher Education &amp; Pedagogy</h2>
       <p>Building on my <strong>Diplomado in Higher Education</strong>, I'm focusing on:</p>
       <ul>
         <li>Integrating software engineering principles into educational curricula.</li>
@@ -33,7 +34,7 @@ const t = ui[lang];
     </section>
 
     <section class="roadmap-section">
-      <h2>3. Medical & Informatics Integration</h2>
+      <h2>3. Medical &amp; Informatics Integration</h2>
       <ul>
         <li>Investigate the intersection of software engineering and healthcare.</li>
         <li>Explore data interoperability standards (like FHIR).</li>

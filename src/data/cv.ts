@@ -114,3 +114,53 @@ export const cv: CV = {
     interests: ['Language Design', 'Robotics', 'Contact sports'],
   },
 };
+
+export const cvES: CV = {
+  ...cv,
+  education: [
+    {
+      ...cv.education[0],
+      degree: 'Ingeniería Informática',
+      thesis: 'Un ejemplo de semántica ejecutable (aprobada con honores).',
+      relevant_courses: ['Programación Funcional', 'Construcción de Compiladores', 'Semántica', 'Taller de Base de Datos'],
+    },
+    {
+      ...cv.education[1],
+      degree: 'Bachiller en Humanidades',
+      relevant_courses: ['Programación en C++', 'Robótica'],
+    },
+  ],
+  experience: [
+    { ...cv.experience[0], title: 'Desarrollador Fullstack', responsibilities: [
+      'Desarrollo Fullstack de una aplicación web de gestión de inventarios para un negocio local.',
+      'Migración de datos de un sistema heredado a una nueva base de datos.',
+      'Diseño de interacción de usuario.',
+    ]},
+    { ...cv.experience[1], title: 'Desarrollador Fullstack — Videojuegos', responsibilities: [
+      'Configuración de soluciones en la nube: Google Cloud, almacenamiento Azure.',
+      'Implementación de APIs REST.',
+      'Diseño de interacción de usuario y transiciones de escena.',
+    ]},
+    { ...cv.experience[2], title: 'Desarrollador C#', responsibilities: [
+      'Procesamiento de imágenes con OpenCV en Unity.',
+      'Implementación de módulos C#, recuperación de datos desde proveedor de ubicación.',
+    ]},
+    { ...cv.experience[3], title: 'Auxiliar de Docencia', responsibilities: [
+      'Introducción a la Programación: enfoque en resolución de problemas, Java y Pseint.',
+      'Elementos de Programación y Estructuras de Datos: recursión, backtracking, conceptos funcionales.',
+    ]},
+  ],
+  achievements: [
+    '3er Lugar Microsoft Ambassadors Hackathon IA 2023',
+    'Medalla de Plata en Robótica Potosí 2016',
+    'Participante OBI Potosí 2014–2016',
+  ],
+  other: {
+    languages: cv.other.languages,
+    interests: ['Diseño de Lenguajes', 'Robótica', 'Deportes de contacto'],
+  },
+};
+
+export function getCv(lang: 'en' | 'es'): CV {
+  return lang === 'es' ? cvES : cv;
+}

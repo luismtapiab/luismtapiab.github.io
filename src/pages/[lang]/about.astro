@@ -1,14 +1,26 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { ui } from '../../data/i18n';
-import { cv } from '../../data/cv';
+import { ui, type Lang } from '../../data/i18n';
+import { getCv } from '../../data/cv';
 import { SITE_TITLE } from '../../consts';
 
-const lang = 'en';
+export function getStaticPaths() {
+  return [{ params: { lang: 'en' } }, { params: { lang: 'es' } }];
+}
+
+const { lang } = Astro.params as { lang: Lang };
 const t = ui[lang].about;
+const cv = getCv(lang);
+
+const descriptions = {
+  en: 'About Luis Tapia — developer and musician from Bolivia.',
+  es: 'Sobre Luis Tapia — desarrollador y músico de Bolivia.',
+};
+const pdfLabel = { en: 'Download PDF', es: 'Descargar PDF' };
+const skillsLabel = { en: { title: 'Technical Skills', lang: 'Languages:', tools: 'Tools:' }, es: { title: 'Habilidades Técnicas', lang: 'Lenguajes:', tools: 'Herramientas:' } };
 ---
 
-<BaseLayout lang={lang} title={`${t.title} · ${SITE_TITLE}`} description="About Luis Tapia — developer and musician from Bolivia.">
+<BaseLayout lang={lang} title={`${t.title} · ${SITE_TITLE}`} description={descriptions[lang]}>
   <section class="about-header">
     <div class="about-title-contact">
       <h1>Luis Miguel Tapia Benitez</h1>
@@ -29,10 +41,10 @@ const t = ui[lang].about;
   </section>
 
   <section class="cv-section">
-    <h2>Technical Skills</h2>
+    <h2>{skillsLabel[lang].title}</h2>
     <div class="skills-simple">
-      <p><strong>Languages:</strong> {cv.skills.lang.join(', ')}</p>
-      <p><strong>Tools:</strong> {cv.skills.tools.join(', ')}</p>
+      <p><strong>{skillsLabel[lang].lang}</strong> {cv.skills.lang.join(', ')}</p>
+      <p><strong>{skillsLabel[lang].tools}</strong> {cv.skills.tools.join(', ')}</p>
     </div>
   </section>
 
@@ -89,7 +101,7 @@ const t = ui[lang].about;
     </ul>
   </section>
 
-  <a href="/assets/LuisTapia.pdf" target="_blank" class="pdf-link-bottom">Download PDF</a>
+  <a href="/assets/LuisTapia.pdf" target="_blank" class="pdf-link-bottom">{pdfLabel[lang]}</a>
 </BaseLayout>
 
 <style>

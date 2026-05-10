@@ -1,11 +1,15 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Repo from '../../components/Repo.astro';
-import { ui } from '../../data/i18n';
+import { ui, type Lang } from '../../data/i18n';
 import { compilersRepos, otherRepos } from '../../data/repos';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 
-const lang = 'es';
+export function getStaticPaths() {
+  return [{ params: { lang: 'en' } }, { params: { lang: 'es' } }];
+}
+
+const { lang } = Astro.params as { lang: Lang };
 const t = ui[lang];
 ---
 
@@ -13,7 +17,7 @@ const t = ui[lang];
   <section class="hero">
     <div class="hero-text">
       <h1>{t.home.greeting}</h1>
-      <p class="lead">{t.home.intro}</p>
+      <p class="lead" set:html={t.home.intro} />
     </div>
     <img
       class="avatar"
@@ -44,6 +48,11 @@ const t = ui[lang];
     gap: 2rem;
     margin-bottom: 3.5rem;
     flex-wrap: wrap-reverse;
+  }
+
+  .hero-text {
+    flex: 1;
+    min-width: 240px;
   }
 
   .hero-text h1 {

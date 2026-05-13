@@ -6,53 +6,80 @@
 
 :root {
   /* Color palette — light */
-  --bg:          #faebd7;        /* antique white */
-  --bg-offset:   #f0ddc4;        /* slightly darker card/code bg */
-  --surface:     #fff8f0;        /* elevated surfaces */
-  --text:        #2a1f14;        /* dark warm brown */
-  --text-muted:  #7a6555;        /* secondary text */
-  --border:      #d8c4b0;        /* subtle dividers */
+  --bg: #faebd7;
+  /* antique white */
+  --bg-offset: #f0ddc4;
+  /* slightly darker card/code bg */
+  --surface: #fff8f0;
+  /* elevated surfaces */
+  --text: #2a1f14;
+  /* dark warm brown */
+  --text-muted: #5a4a3f;
+  /* darkened for better contrast (was #7a6555) */
+  --border: #d8c4b0;
+  /* subtle dividers */
+
+  /* Active state */
+  --active-bg: #fff;
+
 
   /* Accent colors */
-  --accent:      #c0533a;        /* terracotta — primary actions, links */
-  --accent-alt:  #7a9e7e;        /* sage green — tags, badges */
-  --accent-warm: #c09c53;        /* warm gold — highlights */
+  --accent: #a0422e;
+  /* darkened for better contrast (was #c0533a) */
+  --accent-alt: #7a9e7e;
+  /* sage green — tags, badges */
+  --accent-warm: #a08145;
+  /* darkened for better contrast (was #c09c53) */
 
   /* Shadows */
-  --shadow-sm:   0 1px 3px rgba(42,31,20,0.08);
-  --shadow-md:   0 4px 12px rgba(42,31,20,0.10), 0 1px 3px rgba(42,31,20,0.06);
-  --shadow-lg:   0 8px 24px rgba(42,31,20,0.12), 0 2px 6px rgba(42,31,20,0.08);
+  --shadow-sm: 0 1px 3px rgba(42, 31, 20, 0.08);
+  --shadow-md: 0 4px 12px rgba(42, 31, 20, 0.10), 0 1px 3px rgba(42, 31, 20, 0.06);
+  --shadow-lg: 0 8px 24px rgba(42, 31, 20, 0.12), 0 2px 6px rgba(42, 31, 20, 0.08);
 
   /* Layout */
-  --max-w:       350px;
-  --max-w-wide:  960px;
+  --max-w: 350px;
+  --max-w-wide: 960px;
 
   /* Transitions */
-  --transition:  200ms ease;
+  --transition: 200ms ease;
 }
 
 [data-theme='dark'] {
-  --bg:          #1e140e;        /* near-black chocolate */
-  --bg-offset:   #2b1e16;        /* dark chocolate */
-  --surface:     #38261c;        /* lifted surfaces */
-  --text:        #fdf5e6;        /* old lace */
-  --text-muted:  #b89f8a;        /* muted warm */
-  --border:      #4a3525;        /* dark borders */
+  --bg: #1e140e;
+  /* near-black chocolate */
+  --bg-offset: #2b1e16;
+  /* dark chocolate */
+  --surface: #38261c;
+  /* lifted surfaces */
+  --text: #fdf5e6;
+  /* old lace */
+  --text-muted: #b89f8a;
+  /* muted warm */
+  --border: #4a3525;
+  /* dark borders */
 
-  --accent:      #e07a60;        /* lighter terracotta for dark bg */
-  --accent-alt:  #8bbf8e;        /* lighter sage */
-  --accent-warm: #d4aa5f;        /* lighter gold */
+  /* Active state */
+  --active-bg: #000;
 
-  --shadow-sm:   0 1px 3px rgba(0,0,0,0.3);
-  --shadow-md:   0 4px 12px rgba(0,0,0,0.35), 0 1px 3px rgba(0,0,0,0.2);
-  --shadow-lg:   0 8px 24px rgba(0,0,0,0.4), 0 2px 6px rgba(0,0,0,0.25);
+  --accent: #e07a60;
+  /* lighter terracotta for dark bg */
+  --accent-alt: #8bbf8e;
+  /* lighter sage */
+  --accent-warm: #d4aa5f;
+  /* lighter gold */
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.35), 0 1px 3px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4), 0 2px 6px rgba(0, 0, 0, 0.25);
 }
 
 /* ============================================
    RESET & BASE
    ============================================ */
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -73,7 +100,12 @@ body {
    TYPOGRAPHY
    ============================================ */
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 0 0 0.5em;
   color: var(--text);
   line-height: 1.15;
@@ -81,16 +113,38 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.015em;
 }
 
-h1 { font-size: clamp(1.75rem, 4.5vw, 2.5rem); }
-h2 { font-size: clamp(1.3rem, 3vw, 1.9rem); }
-h3 { font-size: clamp(1.1rem, 2.2vw, 1.5rem); }
-h4 { font-size: 1.2rem; }
-h5 { font-size: 1.05rem; }
+h1 {
+  font-size: clamp(1.75rem, 4.5vw, 2.5rem);
+}
 
-p { margin-bottom: 1em; }
-.prose p { margin-bottom: 1.6em; }
+h2 {
+  font-size: clamp(1.3rem, 3vw, 1.9rem);
+}
 
-strong, b { font-weight: 700; }
+h3 {
+  font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+}
+
+h4 {
+  font-size: 1.2rem;
+}
+
+h5 {
+  font-size: 1.05rem;
+}
+
+p {
+  margin-bottom: 1em;
+}
+
+.prose p {
+  margin-bottom: 1.6em;
+}
+
+strong,
+b {
+  font-weight: 700;
+}
 
 /* ============================================
    LINKS
@@ -102,6 +156,7 @@ a {
   text-underline-offset: 3px;
   transition: color var(--transition), text-decoration-color var(--transition);
 }
+
 a:hover {
   text-decoration-color: var(--accent);
 }
@@ -151,7 +206,7 @@ pre {
   box-shadow: var(--shadow-sm);
 }
 
-pre > code {
+pre>code {
   all: unset;
   font-family: 'Consolas', 'Menlo', monospace;
   font-size: 0.875em;
@@ -189,7 +244,8 @@ table {
   border-collapse: collapse;
 }
 
-th, td {
+th,
+td {
   text-align: left;
   padding: 0.5em 0.75em;
   border-bottom: 1px solid var(--border);
@@ -243,10 +299,12 @@ th {
 
 .sr-only {
   position: absolute !important;
-  width: 1px; height: 1px;
-  padding: 0; margin: -1px;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
   overflow: hidden;
-  clip: rect(0,0,0,0);
+  clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
 }
@@ -256,7 +314,8 @@ th {
    ============================================ */
 
 @media (max-width: 720px) {
-  main { padding: 1.5em 1em; 
+  main {
+    padding: 1.5em 1em;
     width: var(--max-w);
     max-width: calc(100% - 2em);
     margin: 0 auto;

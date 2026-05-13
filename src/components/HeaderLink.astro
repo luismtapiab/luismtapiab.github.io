@@ -1,18 +1,20 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
+import type { HTMLAttributes } from "astro/types";
 
-type Props = HTMLAttributes<'a'>;
+type Props = HTMLAttributes<"a">;
 
 const { href, class: className, ...props } = Astro.props;
-const pathname = Astro.url.pathname.replace(/\/$/, '') || '/';
-const normalizedHref = (href as string).replace(/\/$/, '') || '/';
+const pathname = Astro.url.pathname.replace(/\/$/, "") || "/";
+const normalizedHref = (href as string).replace(/\/$/, "") || "/";
 
-const isActive = pathname === normalizedHref || 
-  (normalizedHref.split('/').length > 2 && pathname.startsWith(normalizedHref + '/'));
+const isActive =
+  pathname === normalizedHref ||
+  (normalizedHref.split("/").length > 2 &&
+    pathname.startsWith(normalizedHref + "/"));
 ---
 
 <a href={href} class:list={[className, { active: isActive }]} {...props}>
-	<slot />
+  <slot />
 </a>
 <style>
   a {
@@ -32,6 +34,6 @@ const isActive = pathname === normalizedHref ||
   a.active {
     color: var(--accent);
     font-weight: 600;
-    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    background: color-mix(in srgb, var(--active-bg) 50%, transparent);
   }
 </style>

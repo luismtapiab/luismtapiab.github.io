@@ -1,61 +1,86 @@
 ---
-import { getCollection } from 'astro:content';
-import BaseLayout from '../../../layouts/BaseLayout.astro';
-import FormattedDate from '../../../components/FormattedDate.astro';
-import { ui, type Lang } from '../../../data/i18n';
-import { SITE_TITLE } from '../../../consts';
+import { getCollection } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import FormattedDate from "../../../components/FormattedDate.astro";
+import { ui, type Lang } from "../../../data/i18n";
+import { SITE_TITLE } from "../../../consts";
 
 export async function getStaticPaths() {
-  return [{ params: { lang: 'en' } }, { params: { lang: 'es' } }];
+  return [{ params: { lang: "en" } }, { params: { lang: "es" } }];
 }
 
 const { lang } = Astro.params as { lang: Lang };
 const t = ui[lang].blog;
 
-const posts = (await getCollection('blog', ({ data }) => data.lang === lang)).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+const posts = (await getCollection("blog", ({ data }) => data.lang === lang))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .filter((a) => a.data.pubDate.valueOf() <= Date.now());
 
-const emptyMsg = { en: 'No posts yet — check back soon.', es: 'Aún no hay entradas — vuelve pronto.' };
-const descriptions = { en: "Luis Tapia's blog posts.", es: 'Entradas del blog de Luis Tapia.' };
+const emptyMsg = {
+  en: "No posts yet — check back soon.",
+  es: "Aún no hay entradas — vuelve pronto.",
+};
+const descriptions = {
+  en: "Luis Tapia's blog posts.",
+  es: "Entradas del blog de Luis Tapia.",
+};
 ---
 
-<BaseLayout lang={lang} title={`${t.title} · ${SITE_TITLE}`} description={descriptions[lang]} wideContent>
+<BaseLayout
+  lang={lang}
+  title={`${t.title} · ${SITE_TITLE}`}
+  description={descriptions[lang]}
+  wideContent
+>
   <h1>{t.title}</h1>
 
-  {posts.length === 0 && (
-    <p class="empty">{emptyMsg[lang]}</p>
-  )}
+  {posts.length === 0 && <p class="empty">{emptyMsg[lang]}</p>}
 
   <ul class="post-list">
-    {posts.map(post => (
-      <li>
-        <a href={`/${lang}/blog/${post.id.replace(`${lang}/`, '').replace(/\.mdx?$/, '')}/`} class="post-card card">
-          <div class="post-info">
-            <time class="post-date"><FormattedDate date={post.data.pubDate} /></time>
-            <h2 class="post-title">{post.data.title}</h2>
-            <p class="post-desc">{post.data.description}</p>
-            <span class="read-more">{t.readMore} →</span>
-          </div>
-          {post.data.heroImage && (
-            <img
-              class="post-thumb"
-              width={480}
-              height={240}
-              src={post.data.heroImage}
-              alt=""
-            />
-          )}
-        </a>
-      </li>
-    ))}
+    {
+      posts.map((post) => (
+        <li>
+          <a
+            href={`/${lang}/blog/${post.id
+              .replace(`${lang}/`, "")
+              .replace(/\.mdx?$/, "")}/`}
+            class="post-card card"
+          >
+            <div class="post-info">
+              <time class="post-date">
+                <FormattedDate date={post.data.pubDate} />
+              </time>
+              <h2 class="post-title">{post.data.title}</h2>
+              <p class="post-desc">{post.data.description}</p>
+              <span class="read-more">{t.readMore} →</span>
+            </div>
+            {(post.data.heroImageForList || post.data.heroImage) && (
+              <img
+                class={`post-thumb ${
+                  post.data.heroImageFit === "contain" ? "fit-contain" : ""
+                }`}
+                width={480}
+                height={240}
+                src={post.data.heroImageForList || post.data.heroImage}
+                alt=""
+              />
+            )}
+          </a>
+        </li>
+      ))
+    }
   </ul>
 </BaseLayout>
 
 <style>
-  h1 { margin-bottom: 1.5em; }
+  h1 {
+    margin-bottom: 1.5em;
+  }
 
-  .empty { color: var(--text-muted); font-style: italic; }
+  .empty {
+    color: var(--text-muted);
+    font-style: italic;
+  }
 
   .post-list {
     list-style: none;
@@ -84,6 +109,12 @@ const descriptions = { en: "Luis Tapia's blog posts.", es: 'Entradas del blog de
     flex-shrink: 0;
   }
 
+  .post-thumb.fit-contain {
+    object-fit: contain;
+    background: var(--card-bg);
+    padding: 1rem;
+  }
+
   .post-info {
     flex: 1;
     display: flex;
@@ -103,7 +134,9 @@ const descriptions = { en: "Luis Tapia's blog posts.", es: 'Entradas del blog de
     transition: color var(--transition);
   }
 
-  .post-card:hover .post-title { color: var(--accent); }
+  .post-card:hover .post-title {
+    color: var(--accent);
+  }
 
   .post-desc {
     font-size: 0.92rem;
@@ -120,7 +153,12 @@ const descriptions = { en: "Luis Tapia's blog posts.", es: 'Entradas del blog de
   }
 
   @media (max-width: 560px) {
-    .post-card { flex-direction: column-reverse; }
-    .post-thumb { width: 100%; height: 160px; }
+    .post-card {
+      flex-direction: column-reverse;
+    }
+    .post-thumb {
+      width: 100%;
+      height: 160px;
+    }
   }
 </style>

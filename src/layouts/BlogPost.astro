@@ -6,14 +6,20 @@ import type { Lang } from '../data/i18n';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage, lang } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, heroImageFit, lang } = Astro.props;
 ---
 
 <BaseLayout lang={lang as Lang} title={title} description={description} image={heroImage}>
   <article>
     {heroImage && (
       <div class="hero-image">
-        <img width={960} height={480} src={heroImage} alt="" />
+        <img 
+          class={heroImageFit === 'contain' ? 'fit-contain' : ''}
+          width={960} 
+          height={480} 
+          src={heroImage} 
+          alt="" 
+        />
       </div>
     )}
     <div class="post-header">
@@ -42,6 +48,12 @@ const { title, description, pubDate, updatedDate, heroImage, lang } = Astro.prop
     object-fit: cover;
     border-radius: 0 0 12px 12px;
     box-shadow: var(--shadow-md);
+  }
+
+  .hero-image img.fit-contain {
+    object-fit: contain;
+    background: var(--card-bg);
+    padding: 2rem;
   }
 
   .post-header {

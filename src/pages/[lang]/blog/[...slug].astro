@@ -7,7 +7,9 @@ export async function getStaticPaths() {
   const langs: Lang[] = ['en', 'es'];
   const paths = await Promise.all(
     langs.map(async (lang) => {
-      const posts = await getCollection('blog', ({ data }) => data.lang === lang);
+      const posts = await getCollection('blog', (entry: CollectionEntry<'blog'>) => 
+        entry.data.lang === lang && entry.data.pubDate.valueOf() <= Date.now()
+      );
       return posts.map((post) => ({
         params: {
           lang,

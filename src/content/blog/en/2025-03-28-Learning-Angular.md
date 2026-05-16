@@ -2,6 +2,9 @@
 title: "Learning Angular"
 description: "My journey learning Angular 19 and deployment tips."
 pubDate: 2025-04-12
+heroImage: "/assets/images/posts/2025-03-28-Angular/angular_wordmark_gradient.png"
+heroImageForList: "/assets/images/posts/2025-03-28-Angular/angular_gradient.png"
+heroImageFit: "contain"
 lang: "en"
 ---
 I'm currently being part of a startup and we decided on using Angular so I started learning it. I have listened and read great things before and specially about the newest version Angular 19.

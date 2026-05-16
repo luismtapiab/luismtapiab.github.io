@@ -87,7 +87,7 @@
         y="0"
         class="header"
         data-testid="header"
-      >gob-bo-scrapper</text>
+      >functionalParsers</text>
     </g>
       </g>
     
@@ -100,11 +100,16 @@
     
 
     <text class="description" x="25" y="-5">
-      <tspan dy="1.2em" x="25">Web scraper for government data in Bolivia.</tspan>
+      <tspan dy="1.2em" x="25">A library of functional parsers implemented in Haskell.</tspan>
     </text>
 
     <g transform="translate(30, 45)">
-      
+      <g transform="translate(0, 0)">
+    <g data-testid="primary-lang">
+      <circle data-testid="lang-color" cx="0" cy="-5" r="6" fill="#5e5086" />
+      <text data-testid="lang-name" class="gray" x="15">Haskell</text>
+    </g>
+    </g>
     </g>
   
         </g>

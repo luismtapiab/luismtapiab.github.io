@@ -2,6 +2,9 @@
 title: "Aprendiendo Angular"
 description: "Mi experiencia aprendiendo Angular 19 y consejos de despliegue."
 pubDate: 2025-04-12
+heroImage: "/assets/images/posts/2025-03-28-Angular/angular_wordmark_gradient.png"
+heroImageForList: "/assets/images/posts/2025-03-28-Angular/angular_gradient.png"
+heroImageFit: "contain"
 lang: "es"
 ---
 

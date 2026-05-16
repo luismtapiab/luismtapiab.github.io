@@ -10,15 +10,22 @@ interface Props {
   description: string;
   image?: string;
   wideContent?: boolean;
+  showDefaultImage?: boolean;
 }
 
-const { lang, title, description, image, wideContent = false } = Astro.props;
+const { lang, title, description, image, wideContent = false, showDefaultImage = true } = Astro.props;
 ---
 
 <!doctype html>
 <html lang={lang}>
   <head>
-    <BaseHead title={title} description={description} image={image} lang={lang} />
+    <BaseHead 
+      title={title} 
+      description={description} 
+      image={image} 
+      lang={lang} 
+      showDefaultImage={showDefaultImage} 
+    />
   </head>
   <body>
     <Header lang={lang} />

@@ -22,9 +22,9 @@ const otherPath = pathname.replace(`/${lang}/`, `/${otherLang}/`).replace(`/${la
   <nav>
     <a class="site-title" href={base}>Luis Tapia</a>
     <div class="internal-links">
-      <HeaderLink href={base}>{t.home}</HeaderLink>
-      <HeaderLink href={`${base}/blog`}>{t.blog}</HeaderLink>
-      <HeaderLink href={`${base}/about`}>{t.about}</HeaderLink>
+      <HeaderLink href={base} data-astro-prefetch>{t.home}</HeaderLink>
+      <HeaderLink href={`${base}/blog`} data-astro-prefetch>{t.blog}</HeaderLink>
+      <HeaderLink href={`${base}/about`} data-astro-prefetch>{t.about}</HeaderLink>
     </div>
     <div class="controls">
       <button class="search-toggle" onclick="window.openSearch()" title={t.search} aria-label={t.search}>
@@ -33,7 +33,7 @@ const otherPath = pathname.replace(`/${lang}/`, `/${otherLang}/`).replace(`/${la
           <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
         </svg>
       </button>
-      <a href={otherPath} class="lang-toggle" title="Switch language">
+      <a href={otherPath} class="lang-toggle" title="Switch language" data-astro-prefetch>
         {t.switchLang}
       </a>
       <ThemeToggle />

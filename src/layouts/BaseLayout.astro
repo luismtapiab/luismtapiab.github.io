@@ -1,8 +1,8 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import type { Lang } from '../data/i18n';
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import type { Lang } from "../data/i18n";
 
 interface Props {
   lang: Lang;
@@ -13,24 +13,31 @@ interface Props {
   showDefaultImage?: boolean;
 }
 
-const { lang, title, description, image, wideContent = false, showDefaultImage = true } = Astro.props;
+const {
+  lang,
+  title,
+  description,
+  image,
+  wideContent = false,
+  showDefaultImage = true,
+} = Astro.props;
 ---
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang={lang}>
   <head>
-    <BaseHead 
-      title={title} 
-      description={description} 
-      image={image} 
-      lang={lang} 
-      showDefaultImage={showDefaultImage} 
+    <BaseHead
+      title={title}
+      description={description}
+      image={image}
+      lang={lang}
+      showDefaultImage={showDefaultImage}
     />
     <script is:inline>
-      const SCROLL_KEY = 'lang-switch-scroll-pos';
+      const SCROLL_KEY = "lang-switch-scroll-pos";
 
-      if ('scrollRestoration' in history) {
-        history.scrollRestoration = 'manual';
+      if ("scrollRestoration" in history) {
+        history.scrollRestoration = "manual";
       }
 
       function saveScroll() {
@@ -49,12 +56,29 @@ const { lang, title, description, image, wideContent = false, showDefaultImage =
       restoreScroll();
 
       // For ClientRouter (View Transitions)
-      document.addEventListener('astro:after-swap', restoreScroll);
+      document.addEventListener("astro:after-swap", restoreScroll);
 
-      document.addEventListener('click', (e) => {
-        const toggle = e.target.closest('.lang-toggle');
+      document.addEventListener("click", (e) => {
+        const toggle = e.target.closest(".lang-toggle");
         if (toggle) saveScroll();
       });
+
+      // Background prefetch for main pages after delay
+      (function () {
+        const lang = document.documentElement.lang || "en";
+        const mainPages = [`/${lang}`, `/${lang}/blog`, `/${lang}/about`];
+
+        setTimeout(() => {
+          mainPages.forEach((url) => {
+            if (url !== window.location.pathname) {
+              const link = document.createElement("link");
+              link.rel = "prefetch";
+              link.href = url;
+              document.head.appendChild(link);
+            }
+          });
+        }, 10000); // 10 second delay
+      })();
     </script>
   </head>
   <body>
@@ -63,11 +87,10 @@ const { lang, title, description, image, wideContent = false, showDefaultImage =
       <slot />
     </main>
     <Footer lang={lang} />
+    <style>
+      main.wide {
+        max-width: var(--max-w-wide);
+      }
+    </style>
   </body>
 </html>
-
-<style>
-  main.wide {
-    max-width: var(--max-w-wide);
-  }
-</style>

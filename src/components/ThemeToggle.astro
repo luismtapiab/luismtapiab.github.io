@@ -23,11 +23,20 @@
 </style>
 
 <script>
-  const toggle = document.getElementById('theme-toggle');
-  toggle?.addEventListener('click', () => {
-    const currentTheme = document.documentElement.dataset.theme;
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    document.documentElement.dataset.theme = newTheme;
-    localStorage.setItem('theme', newTheme);
-  });
+  function setupThemeToggle() {
+    const toggle = document.getElementById('theme-toggle');
+    if (toggle) {
+      toggle.addEventListener('click', () => {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        const newTheme = isDark ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+      });
+    }
+  }
+
+  // Runs on initial load
+  setupThemeToggle();
+  // Runs on every navigation with View Transitions
+  document.addEventListener('astro:page-load', setupThemeToggle);
 </script>

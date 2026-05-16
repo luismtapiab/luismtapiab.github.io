@@ -26,6 +26,36 @@ const { lang, title, description, image, wideContent = false, showDefaultImage =
       lang={lang} 
       showDefaultImage={showDefaultImage} 
     />
+    <script is:inline>
+      const SCROLL_KEY = 'lang-switch-scroll-pos';
+
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+      }
+
+      function saveScroll() {
+        sessionStorage.setItem(SCROLL_KEY, window.scrollY.toString());
+      }
+
+      function restoreScroll() {
+        const savedPos = sessionStorage.getItem(SCROLL_KEY);
+        if (savedPos) {
+          window.scrollTo(0, parseInt(savedPos, 10));
+          setTimeout(() => sessionStorage.removeItem(SCROLL_KEY), 100);
+        }
+      }
+
+      // Initial load
+      restoreScroll();
+
+      // For ClientRouter (View Transitions)
+      document.addEventListener('astro:after-swap', restoreScroll);
+
+      document.addEventListener('click', (e) => {
+        const toggle = e.target.closest('.lang-toggle');
+        if (toggle) saveScroll();
+      });
+    </script>
   </head>
   <body>
     <Header lang={lang} />

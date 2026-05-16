@@ -5,29 +5,41 @@ import type { Lang } from '../../../data/i18n';
 
 export async function getStaticPaths() {
   const langs: Lang[] = ['en', 'es'];
-  const paths = await Promise.all(
+  const results = await Promise.all(
     langs.map(async (lang) => {
       const posts = await getCollection('blog', (entry: CollectionEntry<'blog'>) => 
         entry.data.lang === lang && entry.data.pubDate.valueOf() <= Date.now()
       );
-      return posts.map((post) => ({
+      
+      // Sort by date descending (newest first)
+      posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+      return posts.map((post, index) => ({
         params: {
           lang,
           slug: post.id.replace(`${lang}/`, '').replace(/\.mdx?$/, ''),
         },
-        props: post,
+        props: {
+          post,
+          prevPost: posts[index + 1] || null, // index + 1 is older
+          nextPost: posts[index - 1] || null, // index - 1 is newer
+        },
       }));
     })
   );
-  return paths.flat();
+  return results.flat();
 }
 
-type Props = CollectionEntry<'blog'>;
+type Props = {
+  post: CollectionEntry<'blog'>;
+  prevPost: CollectionEntry<'blog'> | null;
+  nextPost: CollectionEntry<'blog'> | null;
+};
 
-const post = Astro.props;
+const { post, prevPost, nextPost } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<BlogPost {...post.data}>
+<BlogPost {...post.data} prevPost={prevPost} nextPost={nextPost}>
   <Content />
 </BlogPost>

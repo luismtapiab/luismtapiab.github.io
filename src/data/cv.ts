@@ -44,6 +44,13 @@ export const cv: CV = {
   },
   education: [
     {
+      institution: 'Universidad Pública de El Alto',
+      degree: 'Postgraduate Diploma in Higher Education based on Competencies',
+      location: 'Bolivia',
+      graduation_date: '2026 – present',
+      relevant_courses: [],
+    },
+    {
       institution: 'Universidad Mayor de San Simón',
       degree: 'Ingeniería Informática (Computer Science)',
       location: 'Cochabamba, Bolivia',
@@ -101,6 +108,7 @@ export const cv: CV = {
     },
   ],
   achievements: [
+    '2nd Place Tech4Future Hack 2026',
     '3rd Place Microsoft Ambassadors Hackathon IA 2023',
     'Robotics Silver Medal Potosí 2016',
     'OBI Participant Potosí 2014–2016',
@@ -120,6 +128,11 @@ export const cvES: CV = {
   education: [
     {
       ...cv.education[0],
+      degree: 'Diplomado en Educación Superior por Competencias',
+      relevant_courses: [],
+    },
+    {
+      ...cv.education[1],
       degree: 'Ingeniería Informática',
       thesis: 'Un ejemplo de semántica ejecutable (aprobada con honores).',
       relevant_courses: ['Programación Funcional', 'Construcción de Compiladores', 'Semántica', 'Taller de Base de Datos'],
@@ -131,26 +144,35 @@ export const cvES: CV = {
     },
   ],
   experience: [
-    { ...cv.experience[0], title: 'Desarrollador Fullstack', responsibilities: [
-      'Desarrollo Fullstack de una aplicación web de gestión de inventarios para un negocio local.',
-      'Migración de datos de un sistema heredado a una nueva base de datos.',
-      'Diseño de interacción de usuario.',
-    ]},
-    { ...cv.experience[1], title: 'Desarrollador Fullstack — Videojuegos', responsibilities: [
-      'Configuración de soluciones en la nube: Google Cloud, almacenamiento Azure.',
-      'Implementación de APIs REST.',
-      'Diseño de interacción de usuario y transiciones de escena.',
-    ]},
-    { ...cv.experience[2], title: 'Desarrollador C#', responsibilities: [
-      'Procesamiento de imágenes con OpenCV en Unity.',
-      'Implementación de módulos C#, recuperación de datos desde proveedor de ubicación.',
-    ]},
-    { ...cv.experience[3], title: 'Auxiliar de Docencia', responsibilities: [
-      'Introducción a la Programación: enfoque en resolución de problemas, Java y Pseint.',
-      'Elementos de Programación y Estructuras de Datos: recursión, backtracking, conceptos funcionales.',
-    ]},
+    {
+      ...cv.experience[0], title: 'Desarrollador Fullstack', responsibilities: [
+        'Desarrollo Fullstack de una aplicación web de gestión de inventarios para un negocio local.',
+        'Migración de datos de un sistema heredado a una nueva base de datos.',
+        'Diseño de interacción de usuario.',
+      ]
+    },
+    {
+      ...cv.experience[1], title: 'Desarrollador Fullstack — Videojuegos', responsibilities: [
+        'Configuración de soluciones en la nube: Google Cloud, almacenamiento Azure.',
+        'Implementación de APIs REST.',
+        'Diseño de interacción de usuario y transiciones de escena.',
+      ]
+    },
+    {
+      ...cv.experience[2], title: 'Desarrollador C#', responsibilities: [
+        'Procesamiento de imágenes con OpenCV en Unity.',
+        'Implementación de módulos C#, recuperación de datos desde proveedor de ubicación.',
+      ]
+    },
+    {
+      ...cv.experience[3], title: 'Auxiliar de Docencia', responsibilities: [
+        'Introducción a la Programación: enfoque en resolución de problemas, Java y Pseint.',
+        'Elementos de Programación y Estructuras de Datos: recursión, backtracking, conceptos funcionales.',
+      ]
+    },
   ],
   achievements: [
+    '2do Lugar Tech4Future Hack 2026',
     '3er Lugar Microsoft Ambassadors Hackathon IA 2023',
     'Medalla de Plata en Robótica Potosí 2016',
     'Participante OBI Potosí 2014–2016',

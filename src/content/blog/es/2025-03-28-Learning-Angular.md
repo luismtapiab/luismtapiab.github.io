@@ -59,7 +59,7 @@ La documentación más reciente de Angular sugiere usar el paquete `angular-gh-p
 
 Github Pages no es configurable como otros servidores, por lo que advierten sobre esto y recomiendan copiar el archivo `index.html` en `404.html`.
 
-Algunas cosas que tuve que configurar fueron el directorio de salida, sin el cual se creaba una subcarpeta del navegador (browser).
+Algunas cosas que tuve que configurar fueron el directorio de salida, sin el cual se creaba una subcarpeta del navegador (browser), una mala elección dirán algunos, pero beneficia el cambio cuando uno opta por usar SSR.
 
 ```
     "builder": application

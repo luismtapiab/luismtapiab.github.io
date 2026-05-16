@@ -8,6 +8,7 @@
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: 'Atkinson Hyperlegible';
   src: url('/fonts/atkinson-hyperlegible-v12-latin-italic.woff2') format('woff2');
@@ -15,6 +16,7 @@
   font-style: italic;
   font-display: swap;
 }
+
 @font-face {
   font-family: 'Atkinson Hyperlegible';
   src: url('/fonts/atkinson-hyperlegible-v12-latin-700.woff2') format('woff2');
@@ -22,6 +24,7 @@
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: 'Atkinson Hyperlegible';
   src: url('/fonts/atkinson-hyperlegible-v12-latin-700italic.woff2') format('woff2');
@@ -230,19 +233,52 @@ code {
 }
 
 pre {
-  background: var(--bg-offset);
+  background: #2b1e16 !important;
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 1.4em 1.6em;
   overflow-x: auto;
   box-shadow: var(--shadow-sm);
+  position: relative;
+  color: #fdf5e6 !important;
 }
 
 pre>code {
   all: unset;
   font-family: 'Consolas', 'Menlo', monospace;
   font-size: 0.875em;
-  color: var(--text);
+  color: inherit !important;
+}
+
+/* Copy Button Styles */
+.copy-code-button {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  padding: 0.4rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-muted);
+  cursor: pointer;
+  opacity: 1; /* Permanently visible */
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.copy-code-button:hover {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+.copy-code-button.copied {
+  background: var(--accent-alt);
+  color: white;
+  border-color: var(--accent-alt);
 }
 
 /* ============================================

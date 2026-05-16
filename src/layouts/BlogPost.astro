@@ -70,16 +70,28 @@ const {
         <nav class="post-navigation">
           <div class="nav-item prev">
             {prevPost && (
-              <a href={`/${lang}/blog/${prevPost.id.replace(`${lang}/`, "").replace(/\.mdx?$/, "")}`}>
-                <span class="nav-label">← {lang === 'es' ? 'Anterior' : 'Previous'}</span>
+              <a
+                href={`/${lang}/blog/${prevPost.id
+                  .replace(`${lang}/`, "")
+                  .replace(/\.mdx?$/, "")}`}
+              >
+                <span class="nav-label">
+                  ← {lang === "es" ? "Anterior" : "Previous"}
+                </span>
                 <span class="nav-title">{prevPost.data.title}</span>
               </a>
             )}
           </div>
           <div class="nav-item next">
             {nextPost && (
-              <a href={`/${lang}/blog/${nextPost.id.replace(`${lang}/`, "").replace(/\.mdx?$/, "")}`}>
-                <span class="nav-label">{lang === 'es' ? 'Siguiente' : 'Next'} →</span>
+              <a
+                href={`/${lang}/blog/${nextPost.id
+                  .replace(`${lang}/`, "")
+                  .replace(/\.mdx?$/, "")}`}
+              >
+                <span class="nav-label">
+                  {lang === "es" ? "Siguiente" : "Next"} →
+                </span>
                 <span class="nav-title">{nextPost.data.title}</span>
               </a>
             )}
@@ -183,4 +195,170 @@ const {
       grid-template-columns: 1fr;
     }
   }
+
+  /* Lightbox & Progress Bar Styles */
+  #scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: var(--accent);
+    z-index: 1000;
+    transition: width 0.1s ease-out;
+  }
+
+  .prose :global(img) {
+    cursor: zoom-in;
+    transition: transform 0.3s ease;
+  }
+
+  /* Simple Lightbox Modal */
+  #lightbox-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    cursor: zoom-out;
+    backdrop-filter: blur(4px);
+  }
+
+  #lightbox-overlay img {
+    max-width: 95%;
+    max-height: 95%;
+    object-fit: contain;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+    transform: scale(0.9);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  #lightbox-overlay.active {
+    display: flex;
+  }
+
+  #lightbox-overlay.active img {
+    transform: scale(1);
+  }
 </style>
+<div id="scroll-progress"></div>
+<div id="lightbox-overlay" aria-hidden="true">
+  <img src="" alt="" />
+</div>
+
+<script>
+  function setupPostFeatures() {
+    // 1. Reading Progress Bar
+    const progressBar = document.getElementById("scroll-progress");
+    const updateProgress = () => {
+      const winScroll =
+        document.body.scrollTop || document.documentElement.scrollTop;
+      const height =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      if (progressBar) progressBar.style.width = scrolled + "%";
+    };
+    window.addEventListener("scroll", updateProgress);
+
+    // 2. Lightbox / Image Zoom
+    const overlay = document.getElementById("lightbox-overlay");
+    const overlayImg = overlay?.querySelector("img");
+    const images = document.querySelectorAll(".prose img, .hero-image img");
+
+    images.forEach((img) => {
+      img.addEventListener("click", () => {
+        if (overlay && overlayImg) {
+          overlayImg.src = (img as HTMLImageElement).src;
+          overlay.classList.add("active");
+          document.body.style.overflow = "hidden";
+        }
+      });
+    });
+
+    overlay?.addEventListener("click", () => {
+      overlay.classList.remove("active");
+      document.body.style.overflow = "";
+    });
+
+    // Close on escape
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && overlay?.classList.contains("active")) {
+        overlay.classList.remove("active");
+        document.body.style.overflow = "";
+      }
+    });
+    // 3. Copy Code Buttons
+    const codeBlocks = document.querySelectorAll("pre");
+    const COPIED_STORAGE_KEY = "copied_code_blocks";
+
+    // Helper to get persistent state
+    const getCopiedHashes = () =>
+      JSON.parse(localStorage.getItem(COPIED_STORAGE_KEY) || "[]");
+    const setCopiedHash = (hash) => {
+      const hashes = getCopiedHashes();
+      if (!hashes.includes(hash)) {
+        hashes.push(hash);
+        localStorage.setItem(COPIED_STORAGE_KEY, JSON.stringify(hashes));
+      }
+    };
+
+    const copyIcon = `
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+        `;
+    const checkIcon = `
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        `;
+
+    codeBlocks.forEach((block) => {
+      if (block.querySelector(".copy-code-button")) return;
+
+      const code = block.querySelector("code");
+      const text = code ? code.innerText : block.innerText;
+      // Simple hash to identify the content
+      const hash = btoa(text.slice(0, 100)).replace(/[^a-zA-Z0-9]/g, "");
+
+      const button = document.createElement("button");
+      button.className = "copy-code-button";
+      button.type = "button";
+      button.ariaLabel = "Copy code";
+
+      // Check if already copied
+      const isCopied = getCopiedHashes().includes(hash);
+      button.innerHTML = isCopied ? checkIcon : copyIcon;
+      if (isCopied) button.classList.add("copied");
+
+      block.appendChild(button);
+
+      button.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(text);
+          button.classList.add("copied");
+          button.innerHTML = checkIcon;
+          setCopiedHash(hash);
+
+          setTimeout(() => {
+            // We keep it visually "copied" for a bit, then reset if desired,
+            // but since the user wants it to "remember", we could keep it.
+            // For now, let's keep the checkmark for 3 seconds then return to normal
+            // but it stays in localStorage for next load.
+          }, 2000);
+        } catch (err) {
+          console.error("Failed to copy!", err);
+        }
+      });
+    });
+  }
+
+  // Initialize on every page load (View Transitions)
+  setupPostFeatures();
+  document.addEventListener("astro:page-load", setupPostFeatures);
+</script>

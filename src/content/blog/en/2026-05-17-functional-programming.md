@@ -9,10 +9,10 @@ In my second year of university, I took a course on Functional Programming. I di
 
 We used Haskell as the main language for the course. we were constraint by this rule: do not use loops and do not use mutable state.
 
-Before this course I was familiar with OOP, especially Java, and I tought in terms of statements. altought I had my fair share with recursion and backtracking this was another level and I liked it.
+Before this course I was familiar with OOP, especially Java, and I tought in terms of statements. Altought I had my fair share with recursion and backtracking this was another level and I liked it.
 
 For the firt weeks we were given exercises to make at hand with pencil and paper. but then we were allowed to use the computer with GHCi. I didnt waste any time and bring mine to every class to the point i have no notebooks left from those days rather than modules with solutions I still have.
 
-after that i learned web development, frameworks and game development but every time the fundation from functional programmeing helped me out to understand things.
+After that I learned web development, frameworks and game development but every time the fundation from functional programming helped me out to understand things.
 
 If you are thinking on taking a functional programming course I highly recomend it, it will change the way you think about programming. Altough be prepare to be frustrated and feel like a begginer again for a while.

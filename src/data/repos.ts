@@ -11,6 +11,7 @@ export const compilersRepos: Repo[] = [
 ];
 
 export const otherRepos: Repo[] = [
+  { id: 'luismtapiab/ngx-multi-field-dropdown', label: 'ngx-multi-field-dropdown — Signals-based searchable dropdown' },
   { id: 'luismtapiab/supabase-ng-realtime-todo', label: 'Supabase Realtime Todo' },
   { id: 'jesusjimeneztapia/chatbot-agetic', label: 'Chatbot AGETIC' },
   { id: 'luismtapiab/gob-bo-scrapper', label: 'Bolivia Gov Scrapper' },

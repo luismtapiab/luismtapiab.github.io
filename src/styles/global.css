@@ -218,6 +218,11 @@ img {
   display: block;
 }
 
+.centered {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* ============================================
    CODE
    ============================================ */
@@ -261,7 +266,8 @@ pre>code {
   border-radius: 6px;
   color: var(--text-muted);
   cursor: pointer;
-  opacity: 1; /* Permanently visible */
+  opacity: 1;
+  /* Permanently visible */
   transition: background 0.2s, color 0.2s, border-color 0.2s;
   display: flex;
   align-items: center;

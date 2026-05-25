@@ -14,7 +14,6 @@ const t = ui[lang].blog;
 
 const posts = (await getCollection("blog", ({ data }) => data.lang === lang))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .filter((a) => a.data.pubDate.valueOf() <= Date.now());
 
 const emptyMsg = {
   en: "No posts yet — check back soon.",
@@ -37,39 +36,43 @@ const descriptions = {
   {posts.length === 0 && <p class="empty">{emptyMsg[lang]}</p>}
 
   <ul class="post-list">
-    {
-      posts.map((post) => (
-        <li>
-          <a
-            href={`/${lang}/blog/${post.id
-              .replace(`${lang}/`, "")
-              .replace(/\.mdx?$/, "")}/`}
-            class="post-card card"
-          >
-            <div class="post-info">
-              <time class="post-date">
-                <FormattedDate date={post.data.pubDate} />
-              </time>
-              <h2 class="post-title">{post.data.title}</h2>
-              <p class="post-desc">{post.data.description}</p>
-              <span class="read-more">{t.readMore} →</span>
-            </div>
-            {(post.data.heroImageForList || post.data.heroImage) && (
-              <img
-                class={`post-thumb ${
-                  post.data.heroImageFit === "contain" ? "fit-contain" : ""
-                }`}
-                width={480}
-                height={240}
-                src={post.data.heroImageForList || post.data.heroImage}
-                alt=""
-              />
-            )}
-          </a>
-        </li>
-      ))
+  {([...posts]).map((post) => {
+    if(post.data.pubDate.valueOf() > Date.now() && import.meta.env.PROD) {
+      return null;
     }
-  </ul>
+    else return (
+    
+    <li>
+      <a
+        href={`/${lang}/blog/${post.id.replace(`${lang}/`, "").replace(/\.mdx?$/, "")}`}
+        class="post-card card"
+      >
+        <div class="post-info">
+          <time class="post-date">
+            <FormattedDate date={post.data.pubDate} />
+          </time>
+          <h2 class="post-title">
+            {post.data.title}
+            {post.data.pubDate.valueOf() > Date.now() && <span class="draft-tag">Draft</span>}
+          </h2>
+          <p class="post-desc">{post.data.description}</p>
+          <span class="read-more">{t.readMore} →</span>
+        </div>
+        {(post.data.heroImageForList || post.data.heroImage) && (
+          <img
+            class={`post-thumb ${post.data.heroImageFit === "contain" ? "fit-contain" : ""}`}
+            width={480}
+            height={240}
+            src={post.data.heroImageForList || post.data.heroImage}
+            alt=""
+          />
+        )}
+      </a>
+    </li>
+    )}
+  )}
+</ul>
+
 </BaseLayout>
 
 <style>
@@ -150,6 +153,16 @@ const descriptions = {
     color: var(--accent);
     font-weight: 600;
     margin-top: 0.25em;
+  }
+
+  .draft-tag {
+    background: var(--accent-warm);
+    color: #fff;
+    padding: 0.2em 0.5em;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    margin-left: 0.5rem;
+    vertical-align: middle;
   }
 
   @media (max-width: 560px) {

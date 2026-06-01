@@ -72,7 +72,6 @@
   --shadow-lg: 0 8px 24px rgba(42, 31, 20, 0.12), 0 2px 6px rgba(42, 31, 20, 0.08);
 
   /* Layout */
-  --max-w: 350px;
   --max-w-wide: 960px;
 
   /* Transitions */
@@ -222,6 +221,26 @@ img {
 .centered {
   margin-left: auto;
   margin-right: auto;
+}
+
+.img-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.img-row>img {
+  flex: 1;
+  max-width: 50%;
+}
+
+@media (max-width: 720px) {
+  .img-row {
+    flex-direction: column;
+  }
+
+  .img-row>img {
+    max-width: 100%;
+  }
 }
 
 /* ============================================
@@ -391,7 +410,6 @@ th {
 @media (max-width: 720px) {
   main {
     padding: 1.5em 1em;
-    width: var(--max-w);
     max-width: calc(100% - 2em);
     margin: 0 auto;
   }

@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { ui } from "../data/i18n";
+import { SITE_TITLE } from "../consts";
+
+const lang = (Astro.params.lang as string) || 'en';
+const t = ui[lang];
+---
+<BaseLayout
+  lang={lang}
+  title={`Page not found – ${SITE_TITLE}`}
+  description={"Oops! The page you’re looking for isn’t here."}
+>
+  <section style="text-align: center; padding: 4rem 0;">
+    <h1>404 – Not Found</h1>
+    <p>You would get it… if it existed!</p>
+    <a href="/" class="button" style="display: inline-block; margin-top: 1rem; padding: 0.5rem 1rem; background: var(--accent); color: #fff; border-radius: 4px; text-decoration: none;">
+      {t?.home ?? "Home"}
+    </a>
+  </section>
+</BaseLayout>

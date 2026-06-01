@@ -1,6 +1,7 @@
 ---
 title: "Dopamine Seeking unusual approach"
 description: "A once-a-day wheel that recommends healthy activities instead of scrolling social media or cheap dopamine"
+heroImageForList: "/assets/images/posts/2026-06-01-dopamine-boost/wheel.png"
 pubDate: 2026-06-01
 lang: "en"
 ---

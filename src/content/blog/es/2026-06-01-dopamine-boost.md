@@ -1,6 +1,7 @@
 ---
 title: "Búsqueda de dopamina, un enfoque inusual"
 description: "Una ruleta que una vez al día te recomienda actividades saludables en lugar de redes sociales o dopamina barata."
+heroImageForList: "/assets/images/posts/2026-06-01-dopamine-boost/wheel.png"
 pubDate: 2026-06-01
 lang: "es"
 ---

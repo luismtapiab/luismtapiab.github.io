@@ -12,58 +12,66 @@
 </div>
 
 <script is:inline>
-  function initPagefind() {
-    if (document.querySelector('#search .pagefind-ui')) return;
-    
-    new PagefindUI({ 
-      element: "#search", 
-      showSubResults: true,
-      translations: {
-        placeholder: "Search posts, projects..."
-      }
+  let pagefindReady = null;
+
+  function loadPagefind() {
+    if (pagefindReady) return pagefindReady;
+
+    pagefindReady = new Promise((resolve) => {
+      const script = document.createElement('script');
+      script.src = '/pagefind/pagefind-ui.js';
+      script.onload = () => resolve();
+      document.head.appendChild(script);
     });
+
+    return pagefindReady;
   }
 
-  window.openSearch = () => {
+  function closeSearch() {
     const modal = document.getElementById('search-modal');
     if (modal) {
-      modal.classList.add('open');
-      document.body.style.overflow = 'hidden';
-      initPagefind();
-      setTimeout(() => {
-        const input = document.querySelector('.pagefind-ui__search-input');
-        if (input) input.focus();
-      }, 100);
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
     }
-  };
+  }
 
-  function setupSearchListeners() {
+  window.openSearch = async () => {
     const modal = document.getElementById('search-modal');
-    const closeBtn = document.getElementById('close-search');
+    if (!modal) return;
 
-    if (closeBtn && modal) {
-      closeBtn.addEventListener('click', () => {
-        modal.classList.remove('open');
-        document.body.style.overflow = '';
-      });
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
 
-      modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-          modal.classList.remove('open');
-          document.body.style.overflow = '';
+    await loadPagefind();
+
+    if (!document.querySelector('#search .pagefind-ui')) {
+      new PagefindUI({
+        element: "#search",
+        showSubResults: true,
+        translations: {
+          placeholder: "Search posts, projects..."
         }
       });
     }
 
+    setTimeout(() => {
+      const input = document.querySelector('.pagefind-ui__search-input');
+      if (input) input.focus();
+    }, 100);
+  };
+
+  if (!window.__searchListenersAttached) {
+    window.__searchListenersAttached = true;
+
+    document.addEventListener('click', (e) => {
+      if (e.target.id === 'close-search') closeSearch();
+      if (e.target.id === 'search-modal') closeSearch();
+    });
+
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modal && modal.classList.contains('open')) {
-        modal.classList.remove('open');
-        document.body.style.overflow = '';
-      }
+      if (e.key === 'Escape') closeSearch();
     });
   }
-
-  document.addEventListener('astro:page-load', setupSearchListeners);
 </script>
 
 <style is:global>
@@ -136,5 +144,101 @@
     color: var(--text);
     border: 1px solid var(--border);
     border-radius: 8px;
+  }
+
+  #search .pagefind-ui__search-clear {
+    background: var(--bg-offset);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+  }
+
+  #search .pagefind-ui__result {
+    border: 1px solid var(--border);
+    background: var(--bg-offset);
+    border-radius: 8px;
+    padding: 1rem;
+  }
+
+  #search .pagefind-ui__result-title,
+  #search .pagefind-ui__result-link {
+    color: var(--accent) !important;
+  }
+
+  #search .pagefind-ui__result-excerpt {
+    color: var(--text);
+  }
+
+  #search .pagefind-ui__result-anchor {
+    color: var(--accent) !important;
+  }
+
+  #search mark {
+    background: color-mix(in srgb, var(--accent) 30%, transparent);
+    color: var(--text);
+  }
+
+  #search .pagefind-ui__message {
+    color: var(--text-muted);
+  }
+
+  #search .pagefind-ui__button {
+    background: var(--bg-offset);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+  }
+
+  #search .pagefind-ui__button:hover {
+    background: var(--surface);
+    color: var(--text);
+  }
+
+  [data-theme='dark'] #search .pagefind-ui__search-input {
+    background-color: #000;
+    color: #fdf5e6;
+    border-color: #333;
+  }
+
+  [data-theme='dark'] .search-modal-content {
+    background: #000;
+    border-color: #333;
+  }
+
+  [data-theme='dark'] #search .pagefind-ui__result {
+    background: #111;
+    border-color: #333;
+  }
+
+  [data-theme='dark'] #search .pagefind-ui__result-title,
+  [data-theme='dark'] #search .pagefind-ui__result-link {
+    color: #e07a60 !important;
+  }
+
+  [data-theme='dark'] #search .pagefind-ui__result-excerpt {
+    color: #ddd;
+  }
+
+  [data-theme='dark'] #search .pagefind-ui__result-anchor {
+    color: #e07a60 !important;
+  }
+
+  [data-theme='dark'] #search .pagefind-ui__search-clear {
+    background: #222;
+    border-color: #444;
+    color: #aaa;
+  }
+
+  [data-theme='dark'] #search .pagefind-ui__button {
+    background: #222;
+    border-color: #444;
+    color: #aaa;
+  }
+
+  [data-theme='dark'] #search .pagefind-ui__button:hover {
+    background: #333;
+    color: #fff;
+  }
+
+  [data-theme='dark'] #search .pagefind-ui__message {
+    color: #999;
   }
 </style>

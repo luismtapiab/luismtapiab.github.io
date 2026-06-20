@@ -37,7 +37,7 @@
     }
   };
 
-  document.addEventListener('DOMContentLoaded', () => {
+  function setupSearchListeners() {
     const modal = document.getElementById('search-modal');
     const closeBtn = document.getElementById('close-search');
 
@@ -61,7 +61,9 @@
         document.body.style.overflow = '';
       }
     });
-  });
+  }
+
+  document.addEventListener('astro:page-load', setupSearchListeners);
 </script>
 
 <style is:global>

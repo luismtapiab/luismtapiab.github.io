@@ -25,11 +25,21 @@ const skillsLabel = { en: { title: 'Technical Skills', lang: 'Languages:', tools
     <div class="about-title-contact">
       <h1>Luis Miguel Tapia Benitez</h1>
       <div class="contact-info">
-        <p>{cv.contact.location}</p>
-        <p>Github: <a href={cv.contact.github} target="_blank" rel="noopener noreferrer">luismtapiab</a></p>
-        <p><a href={`tel:${cv.contact.phone}`}>{cv.contact.phone}</a></p>
-        <p><a href={`mailto:${cv.contact.email}`}>{cv.contact.email}</a></p>
+        <p class="contact-line">
+          {cv.contact.location && <span class="contact-item">{cv.contact.location}</span>}
+          <span class="contact-sep">·</span>
+          <span class="contact-item">GitHub: <a href={cv.contact.github} target="_blank" rel="noopener noreferrer">luismtapiab</a></span>
+          <span class="contact-sep">·</span>
+          <span class="contact-item"><a href={`tel:${cv.contact.phone}`}>{cv.contact.phone}</a></span>
+          <span class="contact-sep">·</span>
+          <span class="contact-item"><a href={`mailto:${cv.contact.email}`}>{cv.contact.email}</a></span>
+        </p>
       </div>
+      {cv.summary && (
+        <div class="summary">
+          <p>{cv.summary}</p>
+        </div>
+      )}
     </div>
     <img
       class="profile-pic"
@@ -41,6 +51,8 @@ const skillsLabel = { en: { title: 'Technical Skills', lang: 'Languages:', tools
   </section>
 
   <section class="cv-section">
+    
+
     <h2>{skillsLabel[lang].title}</h2>
     <div class="skills-simple">
       <p><strong>{skillsLabel[lang].lang}</strong> {cv.skills.lang.join(', ')}</p>
@@ -83,6 +95,18 @@ const skillsLabel = { en: { title: 'Technical Skills', lang: 'Languages:', tools
     ))}
   </section>
 
+  {cv.courses && cv.courses.length > 0 && (
+    <section class="cv-section">
+      <h2>{t.courses}</h2>
+      {cv.courses.map(c => (
+        <div class="course-row">
+          <div class="course-title">{c.title} — {c.institution}</div>
+          <div class="course-date">{c.date}</div>
+        </div>
+      ))}
+    </section>
+  )}
+
   <section class="cv-section split">
     <div class="cv-sub-section">
       <h2>{t.languages}</h2>
@@ -101,7 +125,7 @@ const skillsLabel = { en: { title: 'Technical Skills', lang: 'Languages:', tools
     </ul>
   </section>
 
-  <a href="/assets/LuisTapia.pdf" target="_blank" class="pdf-link-bottom">{pdfLabel[lang]}</a>
+  <a href={lang === 'es' ? '/assets/LuisTapia.pdf' : '/assets/LuisTapia_en.pdf'} target="_blank" class="pdf-link-bottom">{pdfLabel[lang]}</a>
 </BaseLayout>
 
 <style>
@@ -110,7 +134,6 @@ const skillsLabel = { en: { title: 'Technical Skills', lang: 'Languages:', tools
     justify-content: space-between;
     align-items: flex-start;
     gap: 2rem;
-    margin-bottom: 3em;
   }
 
   .about-title-contact h1 {
@@ -121,10 +144,27 @@ const skillsLabel = { en: { title: 'Technical Skills', lang: 'Languages:', tools
     text-overflow: ellipsis;
   }
 
-  .contact-info p {
-    margin: 0.1em 0;
-    font-size: 1.1rem;
+  .contact-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    font-size: 1.05rem;
     color: var(--text);
+  }
+
+  .contact-line {
+    margin: 0;
+  }
+
+  .contact-item a {
+    color: inherit;
+    text-decoration: underline;
+  }
+
+  .contact-sep {
+    margin: 0 0.35rem;
+    color: var(--muted, #666);
   }
 
   .profile-pic {
@@ -224,6 +264,27 @@ const skillsLabel = { en: { title: 'Technical Skills', lang: 'Languages:', tools
   .split {
     display: flex;
     gap: 4rem;
+  }
+
+  .course-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.35em;
+    align-items: baseline;
+  }
+
+  .course-title {
+    flex: 1 1 auto;
+    min-width: 0;
+    font-size: 1.05rem;
+  }
+
+  .course-date {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    color: var(--muted, #666);
+    font-size: 1rem;
   }
 
   .cv-sub-section h2 {

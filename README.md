@@ -26,3 +26,18 @@ npm install
 npm run dev     # localhost:4321
 npm run build   # production build
 ```
+
+## Docker (optional)
+
+Build a Docker image that produces the same static output as GitHub Pages and serves it with nginx:
+
+```bash
+# build image (run from repo root)
+docker build -t luistapia-site:latest .
+
+# run container (map port 80 -> container 80)
+docker run --rm -p 80:80 luistapia-site:latest
+```
+
+The site will be available at http://localhost. The Docker build runs `pnpm build`, which also regenerates the PDFs into `public/assets`.
+

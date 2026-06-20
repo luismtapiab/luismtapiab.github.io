@@ -7,10 +7,11 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && pagefind --site dist",
+    "build": "astro build && pnpm run generate:about-pdf && pagefind --site dist",
     "preview": "astro preview",
     "astro": "astro",
-    "download-images": "node download-repo-images.js"
+    "download-images": "node download-repo-images.js",
+    "generate:about-pdf": "node ./scripts/generate-about-pdf.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "5.0.4",
@@ -19,5 +20,8 @@
     "astro": "6.2.1",
     "pagefind": "1.1.0",
     "sharp": "0.34.3"
+  },
+  "devDependencies": {
+    "pdfkit": "^0.14.0"
   }
 }

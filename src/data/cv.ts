@@ -16,6 +16,9 @@ export interface Experience {
 }
 
 export interface CV {
+  name: string;
+  subtitle?: string;
+  summary?: string;
   contact: {
     location: string;
     email: string;
@@ -25,6 +28,11 @@ export interface CV {
   education: Education[];
   experience: Experience[];
   achievements: string[];
+  courses: {
+    title: string;
+    institution: string;
+    date: string;
+  }[];
   skills: {
     lang: string[];
     tools: string[];
@@ -36,6 +44,9 @@ export interface CV {
 }
 
 export const cv: CV = {
+  name: 'Luis Miguel Tapia Benitez',
+  subtitle: 'Computer Engineer',
+  summary: 'Developer focused on compilers, language design, and practical systems. I enjoy building reliable software and learning new paradigms to solve hard problems.',
   contact: {
     location: 'Cochabamba, Bolivia',
     email: 'lmtapia1024@gmail.com',
@@ -113,9 +124,21 @@ export const cv: CV = {
     'Robotics Silver Medal Potosí 2016',
     'OBI Participant Potosí 2014–2016',
   ],
+  courses: [
+    { title: 'DevOps with Docker: Security and optimization', institution: 'University of Helsinki', date: 'June 16, 2026' },
+    { title: 'DevOps with Docker: Docker compose', institution: 'University of Helsinki', date: 'June 15, 2026' },
+    { title: 'DevOps with Docker: Docker Basics', institution: 'University of Helsinki', date: 'June 15, 2026' },
+    { title: 'EF SET English Certificate', institution: 'Education First', date: 'December 24, 2025' },
+    { title: 'Fundamentals and Introduction to Power BI', institution: 'Universidad Mayor de San Simón', date: 'June 28, 2024' },
+    { title: 'Ethical Hacking', institution: 'Universidad Mayor de San Simón', date: 'June 28, 2024' },
+    { title: 'English for IT 2', institution: 'Cisco Networking Academy', date: 'October 24, 2023' },
+    { title: 'English for IT 1', institution: 'Cisco Networking Academy', date: 'October 22, 2023' },
+    { title: 'Introduction to Packet Tracer', institution: 'Cisco Networking Academy', date: 'July 31, 2022' },
+    { title: 'CCNAv7: Introduction to Networks', institution: 'Cisco Networking Academy', date: 'February 8, 2022' },
+  ],
   skills: {
     lang: ['Java', 'JavaScript', 'TypeScript', 'Haskell', 'Python', 'C#', 'Kotlin'],
-    tools: ['PostgreSQL', 'JOOQ', 'Supabase', 'Spring Boot', 'Angular', 'ReactJS', 'Next.js', 'Astro', 'Unity'],
+    tools: ['PostgreSQL', 'JOOQ', 'Supabase', 'Spring Boot', 'Angular', 'ReactJS', 'Next.js', 'Astro', 'Unity', 'Docker', 'GNU/Linux'],
   },
   other: {
     languages: ['Spanish (native)', 'English (Intermediate B2)'],
@@ -125,6 +148,9 @@ export const cv: CV = {
 
 export const cvES: CV = {
   ...cv,
+  name: 'Luis Miguel Tapia Benitez',
+  subtitle: 'Ingeniero Informático',
+  summary: 'Desarrollador enfocado en compiladores, diseño de lenguajes y sistemas prácticos. Disfruto construir software confiable y aprender nuevos paradigmas para resolver problemas complejos.',
   education: [
     {
       ...cv.education[0],
@@ -136,36 +162,46 @@ export const cvES: CV = {
       degree: 'Ingeniería Informática',
       thesis: 'Un ejemplo de semántica ejecutable (aprobada con honores).',
       relevant_courses: ['Programación Funcional', 'Construcción de Compiladores', 'Semántica', 'Taller de Base de Datos'],
+      graduation_date: 'Julio 2023',
     },
     {
-      ...cv.education[1],
+      ...cv.education[2],
       degree: 'Bachiller en Humanidades',
       relevant_courses: ['Programación en C++', 'Robótica'],
+      graduation_date: 'Diciembre 2016',
     },
   ],
   experience: [
     {
-      ...cv.experience[0], title: 'Desarrollador Fullstack', responsibilities: [
-        'Desarrollo Fullstack de una aplicación web de gestión de inventarios para un negocio local.',
+      ...cv.experience[0], title: 'Desarrollador Fullstack', duration: 'Abril 2025 – presente', responsibilities: [
+        'Desarrollo Fullstack de una aplicación web de gestión de inventarios para un negocio local, con autenticación de usuarios, control de acceso basado en roles, despliege en Supabase remoto y local',
         'Migración de datos de un sistema heredado a una nueva base de datos.',
         'Diseño de interacción de usuario.',
       ]
     },
     {
-      ...cv.experience[1], title: 'Desarrollador Fullstack — Videojuegos', responsibilities: [
+      ...cv.experience[1], title: 'Desarrollador Fullstack — Videojuegos',
+      location: "Remoto",
+      duration: 'Agosto 2023 – Febrero 2024',
+      responsibilities: [
         'Configuración de soluciones en la nube: Google Cloud, almacenamiento Azure.',
         'Implementación de APIs REST.',
         'Diseño de interacción de usuario y transiciones de escena.',
       ]
     },
     {
-      ...cv.experience[2], title: 'Desarrollador C#', responsibilities: [
+      ...cv.experience[2], title: 'Desarrollador C#',
+      location: "Remoto",
+      duration: 'Enero 2021 – Febrero 2022',
+      responsibilities: [
         'Procesamiento de imágenes con OpenCV en Unity.',
         'Implementación de módulos C#, recuperación de datos desde proveedor de ubicación.',
       ]
     },
     {
-      ...cv.experience[3], title: 'Auxiliar de Docencia', responsibilities: [
+      ...cv.experience[3], title: 'Auxiliar de Docencia',
+      duration: 'Febrero 2019 – Enero 2021',
+      responsibilities: [
         'Introducción a la Programación: enfoque en resolución de problemas, Java y Pseint.',
         'Elementos de Programación y Estructuras de Datos: recursión, backtracking, conceptos funcionales.',
       ]
@@ -176,6 +212,18 @@ export const cvES: CV = {
     '3er Lugar Microsoft Ambassadors Hackathon IA 2023',
     'Medalla de Plata en Robótica Potosí 2016',
     'Participante OBI Potosí 2014–2016',
+  ],
+  courses: [
+    { title: 'DevOps with Docker: Security and optimization', institution: 'University of Helsinki', date: '16 de Junio de 2026' },
+    { title: 'DevOps with Docker: Docker compose', institution: 'University of Helsinki', date: '15 de Junio de 2026' },
+    { title: 'DevOps with Docker: Docker Basics', institution: 'University of Helsinki', date: '15 de Junio de 2026' },
+    { title: 'EF SET English Certificate', institution: 'Education First', date: '24 de Diciembre de 2025' },
+    { title: 'Fundamentos e Introducción a Power BI', institution: 'Universidad Mayor de San Simón', date: '28 de Junio de 2024' },
+    { title: 'Ethical Hacking', institution: 'Universidad Mayor de San Simón', date: '28 de Junio de 2024' },
+    { title: 'English for IT 2', institution: 'Cisco Networking Academy', date: '24 de Octubre de 2023' },
+    { title: 'English for IT 1', institution: 'Cisco Networking Academy', date: '22 de Octubre de 2023' },
+    { title: 'Introduction to Packet Tracer', institution: 'Cisco Networking Academy', date: '31 de Julio de 2022' },
+    { title: 'CCNAv7: Introduction to Networks', institution: 'Cisco Networking Academy', date: '8 de Febrero de 2022' },
   ],
   other: {
     languages: cv.other.languages,

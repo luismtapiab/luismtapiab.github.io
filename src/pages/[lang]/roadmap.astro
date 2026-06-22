@@ -13,9 +13,39 @@ const { lang } = Astro.params as { lang: Lang };
   <div class="prose" data-pagefind-ignore>
     <h1>Personal Roadmap</h1>
     <p>This is a private roadmap to track my core interests and learning journey.</p>
+    <section class="roadmap-section">
+      <h2>Upcoming Content (Possible Posts)</h2>
+      <ul>
+        <li><em>"Executable Semantics: What My Thesis Was About"</em></li>
+        <li><em>"Why Haskell Changed How I Think About Code"</em></li>
+        <li><em>"Building a Compiler: Where to Start"</em></li>
+        <li><em>"Teaching Programming: Lessons from 2 Years as a TA"</em></li>
+        <li><em>"How Compilers Taught Me to Teach"</em></li>
+        <li><em>"How We Won 2nd at Tech4Future Hack 2026"</em></li>
+        <li><em>"Building with AI at the Microsoft Ambassadors Hackathon"</em></li>
+        <li><em>"Being a Developer in Bolivia: Remote Work, Resources, Reality"</em></li>
+        <li><em>"From C++ in High School to Compiler Construction"</em></li>
+        <li><em>"What CCNA Taught Me About Networks (Even as a Dev)"</em></li>
+        <li><em>"Spoofax: Language Workbenches Made Practical"</em></li>
+        <li><em>"K Framework: Write Your Language Once, Get Everything for Free"</em></li>
+        <li><em>"Dockerizing Everything: My Workflow from Dev to Prod"</em></li>
+        <li><em>"Security Mindset: What Certified Courses Taught Me"</em></li>
+        <li><em>"Building a Better Context: RAG Strategies for AI Agents"</em></li>
+      </ul>
+    </section>
+    
+    <section class="roadmap-section">
+      <h2>1. Security &amp; DevOps</h2>
+      <ul>
+        <li><del>Learn Docker formally</del> ✅</li>
+        <li>Learn security from certified courses (e.g. CompTIA Security+, OSWE).</li>
+        <li>Understand CI/CD pipelines and infrastructure as code (Terraform, Ansible).</li>
+        <li>Study network fundamentals and common attack vectors (OWASP Top 10).</li>
+      </ul>
+    </section>
 
     <section class="roadmap-section">
-      <h2>1. Compiler Construction</h2>
+      <h2>2. Compiler Construction</h2>
       <ul>
         <li>Explore advanced parsing techniques.</li>
         <li>Deepen understanding of semantic analysis and code generation.</li>
@@ -24,7 +54,7 @@ const { lang } = Astro.params as { lang: Lang };
     </section>
 
     <section class="roadmap-section">
-      <h2>2. Higher Education &amp; Pedagogy</h2>
+      <h2>3. Higher Education &amp; Pedagogy</h2>
       <p>Building on my <strong>Diplomado in Higher Education</strong>, I'm focusing on:</p>
       <ul>
         <li>Integrating software engineering principles into educational curricula.</li>
@@ -34,7 +64,7 @@ const { lang } = Astro.params as { lang: Lang };
     </section>
 
     <section class="roadmap-section">
-      <h2>3. Medical &amp; Informatics Integration</h2>
+      <h2>4. Medical &amp; Informatics Integration</h2>
       <ul>
         <li>Investigate the intersection of software engineering and healthcare.</li>
         <li>Explore data interoperability standards (like FHIR).</li>
@@ -43,7 +73,7 @@ const { lang } = Astro.params as { lang: Lang };
     </section>
 
     <section class="roadmap-section">
-      <h2>4. Context Assembly for AI Agents</h2>
+      <h2>5. Context Assembly for AI Agents</h2>
       <ul>
         <li>Study how large language models utilize context and memory.</li>
         <li>Experiment with building custom agents and optimizing their prompt context window.</li>
@@ -53,16 +83,6 @@ const { lang } = Astro.params as { lang: Lang };
     </section>
 
     <hr />
-
-    <section class="roadmap-section">
-      <h2>Upcoming Content (Possible Posts)</h2>
-      <ul>
-        <li><em>"Reflections on Higher Education: Applying the Diplomado to CS"</em></li>
-        <li><em>"The Logic of Teaching: How Compilers Taught Me to Teach"</em></li>
-        <li><em>"Medical Software: Beyond CRUD Applications"</em></li>
-        <li><em>"Building a Better Context: RAG Strategies for AI Agents"</em></li>
-      </ul>
-    </section>
 
     <p class="status"><em>Status: Work in progress. Updated periodically.</em></p>
   </div>
